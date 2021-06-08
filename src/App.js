@@ -8,14 +8,7 @@ import Home from './pages/home';
 import './App.css';
 
 const { Header, Footer, Content } = Layout;
-const ethereum = window.ethereum;
-
-ethereum.on('chainChanged', (chainId) => {
-  // Handle the new chain.
-  // Correctly handling chain changes can be complicated.
-  // We recommend reloading the page unless you have good reason not to.
-  window.location.reload();
-});
+let ethereum;
 
 function truncated(f){
   if (!f) return '';
@@ -27,8 +20,15 @@ function App(){
   const [installed, setInstalled] = useState(false);
   const [address, setAddress] = useState('');
   useEffect(() => {
-    if (typeof ethereum !== 'undefined') {
+    if (typeof window.ethereum !== 'undefined' && !installed) {
       setInstalled(true);
+      ethereum = window.ethereum;
+      ethereum.on('chainChanged', (chainId) => {
+        // Handle the new chain.
+        // Correctly handling chain changes can be complicated.
+        // We recommend reloading the page unless you have good reason not to.
+        window.location.reload();
+      });
       if (!timer.current){
         timer.current = setInterval(() => {
           if (ethereum.selectedAddress && !address){
