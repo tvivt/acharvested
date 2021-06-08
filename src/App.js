@@ -53,14 +53,14 @@ function App(){
       <Router>
         <Layout className='app-layout'>
           <Header className='app-header-background'>
-            <img src={Logo} className='app-header-logo'/>
+            <img src={Logo} className='app-header-logo' alt=''/>
             <div>ACHARVESTED</div>
             <div className='app-navs'>
               <Link to="/">Home</Link>
               <Link to="/">Learn</Link>
               <Link to="/">Potential</Link>
               <Link to="/">Archived</Link>
-              <img src={MetamaskLogo} className='app-header-metamask' onClick={accessingAccount}/>
+              <img src={MetamaskLogo} className='app-header-metamask' onClick={accessingAccount} alt=''/>
               <div>{truncated(address)}</div>
             </div>
           </Header>
