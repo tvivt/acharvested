@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { BrowserRouter as Router,Route, Link } from 'react-router-dom';
 import { ConfigProvider, Layout } from 'antd';
+import { createSign, getNonce, verify } from './shared'
 import Logo from './images/shuidao.png';
 import MetamaskLogo from './images/metamask-fox.svg';
 import zhCN from 'antd/lib/locale/zh_CN';
@@ -8,42 +9,64 @@ import Home from './pages/home';
 import './App.css';
 
 const { Header, Footer, Content } = Layout;
-let ethereum;
 
 function truncated(f){
   if (!f) return '';
-  return f.substr(0,8) + '...' + f.substr(f.length - 8);
+  return f.substr(0,5) + '...' + f.substr(f.length - 5);
 }
 
 function App(){
   const timer = useRef(null);
-  const [installed, setInstalled] = useState(false);
+  const [nonce, setNonce] = useState('');
   const [address, setAddress] = useState('');
+  const [learn, setLearn] = useState([]);
+  const [potential, setPotential] = useState([]);
+
   useEffect(() => {
-    if (typeof window.ethereum !== 'undefined' && !installed) {
-      setInstalled(true);
-      ethereum = window.ethereum;
-      ethereum.on('chainChanged', (chainId) => {
-        // Handle the new chain.
-        // Correctly handling chain changes can be complicated.
-        // We recommend reloading the page unless you have good reason not to.
-        window.location.reload();
-      });
+
+    getNonce().then((response) => {
+      const { code, data } = response.data;
+      if (code === 0){
+        setNonce(data.nonce);
+      }
+    });
+
+    if (typeof window.ethereum !== 'undefined'){
       if (!timer.current){
         timer.current = setInterval(() => {
-          if (ethereum.selectedAddress && !address){
+          if (window.ethereum.selectedAddress){
             clearInterval(timer.current);
-            setAddress(ethereum.selectedAddress);
+            setAddress(window.ethereum.selectedAddress);
           }
         },1000);
       }
     }
-  }, [installed,address]);
+  }, []);
 
   const accessingAccount = () => {
-    if (installed && !ethereum.selectedAddress){
-      ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => {
+    if (!address && typeof window.ethereum !== 'undefined'){
+      window.ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => {
+        if (timer.current){
+          clearInterval(timer.current);
+        }
         setAddress(accounts[0]);
+      });
+    } else {
+      if (learn.length > 0 || potential.length > 0){
+        return;
+      }
+      createSign(nonce, address).then((sign) => {
+        verify(nonce, sign, address).then((response) => {
+          const { code, data } = response.data;
+          if (code === 0){
+            setLearn([123]);
+            setPotential(data.potential);
+          } else {
+            alert('验证未通过')
+          }
+        })
+      }).catch(() => {
+        window.location.reload();
       });
     }
   }
