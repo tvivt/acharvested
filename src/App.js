@@ -61,8 +61,9 @@ function App(){
           if (code === 0){
             setLearn([123]);
             setPotential(data.potential);
+            alert('验证钱包所有权并且在许可名单内');
           } else {
-            alert('验证未通过')
+            alert('已验证钱包所有权但未在许可名单内')
           }
         })
       }).catch(() => {
