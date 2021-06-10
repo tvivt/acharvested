@@ -9,7 +9,7 @@ import Home from './pages/home';
 import Archived from './pages/archived';
 import './App.css';
 
-const { Header, Footer, Content } = Layout;
+const { Header, Content } = Layout;
 
 function truncated(f){
   if (!f) return '';
@@ -20,7 +20,7 @@ const zh_CN = 'zh_CN';
 const en_US = 'en_US';
 const donateAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
 const donateEtherscan = 'https://cn.etherscan.com/address/0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
-const donateContent = '[ETH/ERC20 | BNB/BEP20]：';
+const donateContent = '[ethereum | binance]：';
 
 function WrappedLanguage(Component, language){
   return (props) => {
@@ -123,11 +123,7 @@ function App(){
               <div>{truncated(address)}</div>
             </div>
           </Header>
-          <Content>
-            <Route path='/' component={WrappedLanguage(Home, language)} exact></Route>
-            <Route path='/archived' component={WrappedLanguage(Archived, language)}></Route>
-          </Content>
-          <Footer className='donate'>
+          <div className='donate'>
             Donate(捐赠) {donateContent}
             <a 
               href={donateEtherscan} 
@@ -135,8 +131,12 @@ function App(){
               rel="noreferrer"
             >
               {donateAddress}
-            </a> 
-          </Footer>
+            </a>
+          </div>
+          <Content className='app-content'>
+            <Route path='/' component={WrappedLanguage(Home, language)} exact></Route>
+            <Route path='/archived' component={WrappedLanguage(Archived, language)}></Route>
+          </Content>
         </Layout>
       </Router>
     </ConfigProvider>
