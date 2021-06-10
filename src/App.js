@@ -20,7 +20,7 @@ const zh_CN = 'zh_CN';
 const en_US = 'en_US';
 const donateAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
 const donateEtherscan = 'https://cn.etherscan.com/address/0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
-const donateContent = '[ETH/ERC20 or BNB/BEP20]：';
+const donateContent = '[ETH/ERC20 | BNB/BEP20]：';
 
 function WrappedLanguage(Component, language){
   return (props) => {
