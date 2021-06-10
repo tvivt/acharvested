@@ -6,6 +6,7 @@ import Logo from './images/shuidao.png';
 import MetamaskLogo from './images/metamask-fox.svg';
 import zhCN from 'antd/lib/locale/zh_CN';
 import Home from './pages/home';
+import Archived from './pages/archived';
 import './App.css';
 
 const { Header, Footer, Content } = Layout;
@@ -83,15 +84,26 @@ function App(){
               <Link to="/">Home</Link>
               <Link to="/">Learn</Link>
               <Link to="/">Potential</Link>
-              <Link to="/">Archived</Link>
+              <Link to="/archived">Archived</Link>
               <img src={MetamaskLogo} className='app-header-metamask' onClick={accessingAccount} alt=''/>
               <div>{truncated(address)}</div>
             </div>
           </Header>
           <Content>
-            <Route path='/' component={Home}></Route>
+            <Route path='/' component={Home} exact></Route>
+            <Route path='/archived' component={Archived}></Route>
           </Content>
-          <Footer></Footer>
+          <Footer className='donate'>
+            <div>
+            Donate(捐赠) [ETH/ERC20 or BNB/BEP20]：
+              <a 
+                href='https://cn.etherscan.com/address/0x1A56d61142AC107dbC46f1c15a559906D84eEd59' 
+                target='_blank' rel="noreferrer"
+              >
+                0x1A56d61142AC107dbC46f1c15a559906D84eEd59
+              </a> 
+            </div>
+          </Footer>
         </Layout>
       </Router>
     </ConfigProvider>

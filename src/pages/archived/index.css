@@ -1,0 +1,27 @@
+.archived{
+  padding: 20px 50px 0 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.archived-icon{
+  width: 35px;
+  height: 35px;
+}
+
+.rules-container{
+  width: 700px;
+  height: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: 13px;
+  color: #161616;
+}
+
+.rules-number{
+  font-size: 13px;
+  font-weight: bold;
+}
