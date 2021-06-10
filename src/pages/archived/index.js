@@ -4,7 +4,6 @@ import { createUnique } from '../../shared'
 import './index.css';
 
 const list = archivedData.archived;
-console.log(list)
 
 const columns = [
   {
@@ -55,7 +54,9 @@ const columns = [
 
 
 
-const Archived = () => {
+const Archived = (props) => {
+  // const { language } = props;
+  // console.log('language', language);
   return (
     <div className='archived'>
       <Table
@@ -64,6 +65,9 @@ const Archived = () => {
         bordered
         pagination={{
           defaultPageSize: 5
+        }}
+        rowKey={(record) => {
+          return record.name;
         }}
       />
     </div>

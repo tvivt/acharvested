@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { BrowserRouter as Router,Route, Link } from 'react-router-dom';
-import { ConfigProvider, Layout } from 'antd';
+import { ConfigProvider, Layout, Switch } from 'antd';
 import { createSign, getNonce, verify } from './shared'
 import Logo from './images/shuidao.png';
 import MetamaskLogo from './images/metamask-fox.svg';
@@ -16,8 +16,25 @@ function truncated(f){
   return f.substr(0,5) + '...' + f.substr(f.length - 5);
 }
 
+const zh_CN = 'zh_CN';
+const en_US = 'en_US';
+const donateAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
+const donateEtherscan = 'https://cn.etherscan.com/address/0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
+const donateContent = '[ETH/ERC20 or BNB/BEP20]：';
+
+function WrappedLanguage(Component, language){
+  return (props) => {
+    const newProps = {
+      language,
+      ...props
+    }
+    return <Component {...newProps}/>
+  }
+}
+
 function App(){
   const timer = useRef(null);
+  const [language, setLanguage] = useState(en_US);
   const [nonce, setNonce] = useState('');
   const [address, setAddress] = useState('');
   const [learn, setLearn] = useState([]);
@@ -73,6 +90,15 @@ function App(){
     }
   }
 
+  const switchLanguage = (checked, event) => {
+    if (!checked){
+      setLanguage(zh_CN);
+    }
+    if (checked){
+      setLanguage(en_US);
+    }
+  }
+  
   return (
     <ConfigProvider locale={zhCN}>
       <Router>
@@ -81,28 +107,35 @@ function App(){
             <img src={Logo} className='app-header-logo' alt=''/>
             <div>ACHARVESTED</div>
             <div className='app-navs'>
-              <Link to="/">Home</Link>
-              <Link to="/">Learn</Link>
-              <Link to="/">Potential</Link>
-              <Link to="/archived">Archived</Link>
+              <Link to='/'>Home</Link>
+              <Link to='/'>Learn</Link>
+              <Link to='/'>Potential</Link>
+              <Link to='/archived'>Archived</Link>
+              <div className='app-switch'>
+                <Switch 
+                  checkedChildren="EN"
+                  unCheckedChildren="中"
+                  defaultChecked
+                  onChange={switchLanguage}
+                />
+              </div>
               <img src={MetamaskLogo} className='app-header-metamask' onClick={accessingAccount} alt=''/>
               <div>{truncated(address)}</div>
             </div>
           </Header>
           <Content>
-            <Route path='/' component={Home} exact></Route>
-            <Route path='/archived' component={Archived}></Route>
+            <Route path='/' component={WrappedLanguage(Home, language)} exact></Route>
+            <Route path='/archived' component={WrappedLanguage(Archived, language)}></Route>
           </Content>
           <Footer className='donate'>
-            <div>
-            Donate(捐赠) [ETH/ERC20 or BNB/BEP20]：
-              <a 
-                href='https://cn.etherscan.com/address/0x1A56d61142AC107dbC46f1c15a559906D84eEd59' 
-                target='_blank' rel="noreferrer"
-              >
-                0x1A56d61142AC107dbC46f1c15a559906D84eEd59
-              </a> 
-            </div>
+            Donate(捐赠) {donateContent}
+            <a 
+              href={donateEtherscan} 
+              target='_blank'
+              rel="noreferrer"
+            >
+              {donateAddress}
+            </a> 
           </Footer>
         </Layout>
       </Router>
