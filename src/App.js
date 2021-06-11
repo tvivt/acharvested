@@ -18,9 +18,9 @@ function truncated(f){
 
 const zh_CN = 'zh_CN';
 const en_US = 'en_US';
-const donateAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
-const donateEtherscan = 'https://cn.etherscan.com/address/0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
-const donateContent = '[ethereum | binance]：';
+// const donateAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
+// const donateEtherscan = 'https://cn.etherscan.com/address/0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
+// const donateContent = '[ethereum | binance]：';
 
 function WrappedLanguage(Component, language){
   return (props) => {
