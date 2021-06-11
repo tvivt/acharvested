@@ -79,3 +79,6 @@ export function createUnique() {
     Math.random().toFixed(20).substring(2)
   ); // 20 位随机码
 }
+
+const userAgentInfo = window.navigator.userAgent.toLocaleLowerCase();
+export const isMobile = /(iphone|ipad|ipod|ios|android)/i.test(userAgentInfo);
