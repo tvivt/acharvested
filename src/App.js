@@ -123,7 +123,7 @@ function App(){
               <div>{truncated(address)}</div>
             </div>
           </Header>
-          <div className='donate'>
+          {/* <div className='donate'>
             Donate(捐赠) {donateContent}
             <a 
               href={donateEtherscan} 
@@ -132,7 +132,7 @@ function App(){
             >
               {donateAddress}
             </a>
-          </div>
+          </div> */}
           <Content className='app-content'>
             <Route path='/' component={WrappedLanguage(Home, language)} exact></Route>
             <Route path='/archived' component={WrappedLanguage(Archived, language)}></Route>
