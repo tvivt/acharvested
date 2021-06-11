@@ -76,7 +76,7 @@ function App(){
       createSign(nonce, address).then((sign) => {
         verify(nonce, sign, address).then((response) => {
           const { code, data } = response.data;
-          if (code === 0){
+          if (code === 0 || code === 10){
             setLearn([123]);
             setPotential(data.potential);
             alert('验证钱包所有权并且在许可名单内');
