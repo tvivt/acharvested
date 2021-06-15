@@ -11,7 +11,7 @@ const Learn = (props) => {
       return 'COME SOON';
     }
     if (code === 1){
-      return 'Unable Verify'
+      return 'Unable Verify';
     }
   }
 

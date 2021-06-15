@@ -15,7 +15,7 @@ function truncated(f){
 }
 
 const Header = (props) => {
-  const { callbackToRootComponent, address, learn, potential } = props;
+  const { callbackToRootComponent, address, learn, potential, code } = props;
   const timer = useRef(null);
   const [dropdown, setDropdown] = useState(false);
   const [nonce, setNonce] = useState('');
@@ -59,12 +59,12 @@ const Header = (props) => {
       }
       createSign(nonce, address).then((sign) => {
         verify(nonce, sign, address).then((response) => {
-          const { code, data } = response.data;
-          if (code === 0 || code === 10){
+          const { code: remoteCode, data } = response.data;
+          if (remoteCode === 0 || remoteCode === 10){
             callbackToRootComponent({
               learn: data.learn,
               potential: data.potential,
-              code
+              code: remoteCode
             });
           } else {
             callbackToRootComponent({
@@ -103,13 +103,19 @@ const Header = (props) => {
   });
 
   const metamaskText = address ? 'Verify' : 'Connect Wallet';
-  const renderMetamaskContainer = learn.length > 0 ? (
-    <div className='app-metamask-text'>{truncated(address)}</div>
-  ) : (
-    <div className='app-metamask-text' onClick={accessingAccount}>
-      {metamaskText}
-    </div>
-  );
+  const renderMetamaskContainer = () => {
+    if (code === 0 || code === 10){
+      return <div className='app-metamask-text'>{truncated(address)}</div>
+    }
+    if (code === 1){
+      return 'Unable Verify';
+    }
+    return (
+      <div className='app-metamask-text' onClick={accessingAccount}>
+        {metamaskText}
+      </div>
+    )
+  }
 
   return (
     <div className='app-header'>
@@ -163,7 +169,7 @@ const Header = (props) => {
                 className='app-metamask' 
                   alt=''
               />
-              {renderMetamaskContainer}
+              {renderMetamaskContainer()}
             </div>
           </div>
         </div>

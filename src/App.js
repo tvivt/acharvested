@@ -40,10 +40,7 @@ function App(){
   return (
     <Router>
       <Header
-        language={language}
-        address={address}
-        learn={learn}
-        potential={potential}
+        {...depend}
         callbackToRootComponent={(headerState) => {
           if (typeof headerState.code === 'number' && code !== headerState.code){
             setCode(headerState.code);
