@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { metamaskUrl, isMobile } from './shared'
+// import { metamaskUrl, isMobile } from './shared'
 // import reportWebVitals from './reportWebVitals';
 
-if (typeof window.ethereum !== 'undefined' && !isMobile){
+// if (typeof window.ethereum !== 'undefined' && !isMobile){
 
-} else {
-  alert(`it's used to desktop and go to ${metamaskUrl} install MetaMask`)
-}
+// } else {
+  // alert(`it's used to desktop and go to ${metamaskUrl} install MetaMask`)
+// }
 
 
 ReactDOM.render(
