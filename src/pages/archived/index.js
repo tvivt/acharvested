@@ -1,65 +1,58 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import ReactModal from 'react-modal';
 import archivedData from './archived.json';
 import { createUnique } from '../../shared';
 import './index.css';
 
-const list = archivedData.archived;
-
-console.log('list',list)
-
 const Archived = (props) => {
-  console.log('Archived props', props);
   const { language } = props;
+  const [list] = useState(archivedData.archived);
   const [openModal, setOpenModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
-  console.log('openModal', openModal);
-  console.log('modalContent', modalContent);
-
-  const listSelector = (data) => {
-    setOpenModal(!openModal)
-    setModalContent(data);
-  }
-
+  
   const closeModal = () => {
     setOpenModal(false);
     setModalContent(null);
   }
 
+  const renderList = useMemo(() => {
+    console.log('renderList', list)
+    return list.map((v) => {
+      return (
+        <div 
+          className='archived-box' 
+          key={createUnique()}
+          onClick={(e) => {
+            if (e.target.nodeName === 'A'){
+              return false;
+            }
+            setOpenModal((o) => !o);
+            setModalContent(v);
+          }}
+        >
+          <div className='archived-icon-container'> 
+            <img src={v.icon} alt='' className='archived-icon'/>
+          </div>
+          <div className='archived-iv'>
+            <div className='archived-symbol'>{v.name}</div>
+            <div className='archived-url overflow-ellipsis overflow-hidden'>
+              <a 
+                href={v.url}
+                target='_blank'
+                rel="noreferrer"
+              >
+                {v.url}
+              </a>
+            </div>
+          </div>
+        </div>
+      )
+    })
+  }, [list]);
+  
   return (
     <div className='archived-container'>
-      {
-        list.map((v) => {
-          return (
-            <div 
-              className='archived-box' 
-              key={createUnique()}
-              onClick={(e) => {
-                if (e.target.nodeName === 'A'){
-                  return false;
-                }
-                listSelector(v)
-              }}
-            >
-              <div className='archived-icon-container'> 
-                <img src={v.icon} alt='' className='archived-icon'/>
-              </div>
-              <div className='archived-iv'>
-                <div className='archived-symbol'>{v.name}</div>
-                <div className='archived-url overflow-ellipsis overflow-hidden'>
-                  <a 
-                    href={v.url}
-                    target='_blank'
-                    rel="noreferrer"
-                  >
-                    {v.url}
-                  </a>
-                </div>
-              </div>
-            </div>
-          )
-        })
-      }
+      { renderList }
       {
         modalContent ? (
           <ReactModal
