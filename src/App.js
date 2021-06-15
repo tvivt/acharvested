@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter as Router,Route } from 'react-router-dom';
 import Home from './pages/home';
 import Archived from './pages/archived';
+import Learn from './pages/learn';
 import Header from './Header';
 import './App.css';
 
@@ -18,7 +19,13 @@ function WrappedPageComponent(Component, depend){
   }
 }
 
+// code 99 初始化状态
+// code 0 成功
+// code 1 不在许可名单内
+// code 10 特殊状态
+
 function App(){
+  const [code, setCode] = useState(99)
   const [language, setLanguage] = useState(en_US)
   const [address, setAddress] = useState('');
   const [learn, setLearn] = useState([]);
@@ -27,7 +34,8 @@ function App(){
     language,
     address,
     learn,
-    potential
+    potential,
+    code
   }
   return (
     <Router>
@@ -37,6 +45,9 @@ function App(){
         learn={learn}
         potential={potential}
         callbackToRootComponent={(headerState) => {
+          if (typeof headerState.code === 'number' && code !== headerState.code){
+            setCode(headerState.code);
+          }
           if (headerState.language && language !== headerState.language){
             setLanguage(headerState.language);
           }
@@ -51,8 +62,9 @@ function App(){
           }
         }}
       />
-      <Route path='/' component={WrappedPageComponent(Home, depend)} exact></Route>
-      <Route path='/archived' component={WrappedPageComponent(Archived, depend)}></Route>
+      <Route path='/' component={WrappedPageComponent(Home, depend)} exact />
+      <Route path='/archived' component={WrappedPageComponent(Archived, depend)} />
+      <Route path='/learn' component={WrappedPageComponent(Learn, depend)} />
     </Router>
   )
 }

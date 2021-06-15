@@ -5,6 +5,7 @@ import { createUnique } from '../../shared';
 import './index.css';
 
 const Archived = (props) => {
+  console.log('Archived', props);
   const { language } = props;
   const [list] = useState(archivedData.archived);
   const [openModal, setOpenModal] = useState(false);

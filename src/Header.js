@@ -63,11 +63,15 @@ const Header = (props) => {
           if (code === 0 || code === 10){
             callbackToRootComponent({
               learn: data.learn,
-              potential: data.potential
+              potential: data.potential,
+              code
             });
-            alert('验证钱包所有权并且在许可名单内');
           } else {
-            alert('已验证钱包所有权但未在许可名单内')
+            callbackToRootComponent({
+              learn: [],
+              potential: [],
+              code: 1
+            });
           }
         })
       }).catch(() => {
@@ -135,7 +139,7 @@ const Header = (props) => {
               onClick={switchDropdown} 
               className='app-drop-link'
             >
-                <Link to='/'>Learn</Link>
+                <Link to='/learn'>Learn</Link>
             </div>
             <div
               onClick={switchDropdown}
