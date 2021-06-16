@@ -91,7 +91,7 @@ const Learn = (props) => {
         </div>
         
         <div className='learn-collection'>
-          <p className='text-xl' style={{marginBottom: '5px'}}>操作策略（8）</p>
+          <p className='text-xl' style={{marginBottom: '5px'}}>操作策略（9）</p>
           {renderStudy}
         </div>
 
