@@ -57,7 +57,7 @@ const Learn = (props) => {
         <div className='learn-how-added'>
           <p className='text-xl' style={{marginBottom: '5px'}}>如何加入许可名单列表 ?</p>
           <p className='text-xs learn-padding'>* 访问服务为 120 USDT/年，请发送 120 USDT 至 {donateAddress}</p>
-          <p className='text-xs learn-padding'>* 请发送 TX, 钱包地址（必须和发送 120 USDT地址相同）和 邮箱到 foricepy@gmail.com</p>
+          <p className='text-xs learn-padding'>* 请发送 TX, 钱包地址（必须和发送 120 USDT地址相同）和 邮箱至 foricepy@gmail.com</p>
           <p className='text-xs learn-padding'>* 在一个工作日内（周末顺延至工作日）添加至许可名单列表</p>
         </div>
         <div className='learn-subscrib-total'>
