@@ -1,4 +1,4 @@
-import { donateAddress } from '../../shared';
+import { donateAddress, createUnique } from '../../shared';
 import './index.css';
 
 
@@ -10,17 +10,57 @@ import './index.css';
 // added in allowlist to within one working day
 
 const Learn = (props) => {
-  const { code, total } = props;
+  const { code, total, language, learn } = props;
 
   const renderFunc = () => {
     if (code === 99) {
-      return null
+      return <span style={{color: '#f6851B', fontSize: '14px'}}>请签名验证地址所有权并且在许可名单内</span>
     }
     if (code === 0 || code === 10){
-      return <span className='text-yellow-600'>即将到来</span>
+      return (
+        <div className='learn-boxs'>
+          {
+            learn.map((v) => {
+              return (
+                <div className='learn-box' key={v.name}>
+                  <div className='learn-box-container'>
+                    <div className='learn-box-top'>
+                      <div className='learn-box-icon'>
+                        <img src={v.icon} alt='' />
+                      </div>
+                      <div className='learn-box-title'>
+                        <a 
+                          href={v.url}
+                          target='_blank'
+                          rel="noreferrer"
+                        >
+                          {v.name}
+                        </a>
+                      </div>
+                    </div>
+                    <div className='learn-box-content'>
+                      {
+                        v.description[language].map((m) => {
+                          return (
+                            <p
+                              key={createUnique()}
+                            >
+                              {m}
+                            </p>
+                          )
+                        })
+                      }
+                    </div>
+                  </div>
+                </div>
+              )
+            })
+          }
+        </div>
+      )
     }
     if (code === 1){
-      return <span className='text-red-700'>无法验证，原因是您不在许可名单内! </span>;
+      return <span className='text-red-800' style={{fontSize: '14px'}}>无法验证，原因是您不在许可名单内! </span>;
     }
   }
 
@@ -51,6 +91,7 @@ const Learn = (props) => {
         </div>
         
         <div className='learn-collection'>
+          <p className='text-xl' style={{marginBottom: '5px'}}>操作策略</p>
           {renderStudy}
         </div>
 
