@@ -140,17 +140,17 @@ const Header = (props) => {
         </div>
         <div className='app-drop-down'>
           <div className='app-drop-container'>
-            <div
-              onClick={switchDropdown} 
-              className='app-drop-link'
-            >
-              <Link to='/'>学习</Link>
-            </div>
             <div 
               className='app-drop-link' 
               onClick={switchDropdown}
             >
-              <Link to='/archived'>归档</Link>
+              <Link to='/'>归档</Link>
+            </div>
+            <div
+              onClick={switchDropdown} 
+              className='app-drop-link'
+            >
+              <Link to='/learn'>学习</Link>
             </div>
             <div
               onClick={switchDropdown}
