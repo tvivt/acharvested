@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import { createSign, getNonce, verify, donateAddress, donateEtherscan, truncated } from './shared'
+import { createSign, getNonce, verify, donateAddress, truncated } from './shared'
 import Logo from './images/shuidao.png';
 import MetamaskSVG from './images/metamask-fox.svg';
 import GithubPNG from './images/github.png';
@@ -162,8 +162,8 @@ const Header = (props) => {
               捐赠（Ethereum | Binance）
               <a 
                 target='_blank'
-                rel="noreferrer"
-                href={donateEtherscan}>
+                rel='noreferrer'
+                href='https://gitcoin.co/grants/2755/acharvested'>
                 {donateAddress}
               </a>
             </div>
