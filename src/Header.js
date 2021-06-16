@@ -1,18 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import { createSign, getNonce, verify } from './shared'
+import { createSign, getNonce, verify, donateAddress, donateEtherscan, truncated } from './shared'
 import Logo from './images/shuidao.png';
 import MetamaskSVG from './images/metamask-fox.svg';
 import './Header.css';
-
-const donateAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
-const donateEtherscan = 'https://cn.etherscan.com/address/0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
-
-function truncated(f){
-  if (!f) return '';
-  return f.substr(0,5) + '...' + f.substr(f.length - 5);
-}
 
 const Header = (props) => {
   const { callbackToRootComponent, address, learn, potential, code } = props;
@@ -21,14 +13,15 @@ const Header = (props) => {
   const [nonce, setNonce] = useState('');
 
   useEffect(() => {
-
-    getNonce().then((response) => {
-      const { code, data } = response.data;
-      if (code === 0){
-        setNonce(data.nonce);
-      }
-    });
-
+    if (!nonce){
+      getNonce().then((response) => {
+        const { code, data } = response.data;
+        if (code === 0){
+          setNonce(data.nonce);
+        }
+      });
+    }
+    
     if (typeof window.ethereum !== 'undefined'){
       if (!timer.current){
         timer.current = setInterval(() => {
@@ -41,7 +34,7 @@ const Header = (props) => {
         },1000);
       }
     }
-  }, [callbackToRootComponent]);
+  }, [callbackToRootComponent, nonce]);
 
   const accessingAccount = () => {
     if (!address && typeof window.ethereum !== 'undefined'){

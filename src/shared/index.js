@@ -82,3 +82,11 @@ export function createUnique() {
 
 const userAgentInfo = window.navigator.userAgent.toLocaleLowerCase();
 export const isMobile = /(iphone|ipad|ipod|ios|android)/i.test(userAgentInfo);
+
+export const donateAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
+export const donateEtherscan = 'https://cn.etherscan.com/address/0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
+
+export function truncated(f){
+  if (!f) return '';
+  return f.substr(0,5) + '...' + f.substr(f.length - 5);
+}

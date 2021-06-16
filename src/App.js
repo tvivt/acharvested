@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router,Route } from 'react-router-dom';
+import { getTotal } from './shared';
 import Home from './pages/home';
 import Archived from './pages/archived';
 import Learn from './pages/learn';
@@ -30,12 +31,26 @@ function App(){
   const [address, setAddress] = useState('');
   const [learn, setLearn] = useState([]);
   const [potential, setPotential] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    if (total === 0){
+      getTotal().then((response) => {
+        const { code: remoteCode, data } = response.data;
+        if (remoteCode === 0){
+          setTotal(data.total)
+        }
+      });
+    }
+  },[total])
+
   const depend = {
     language,
     address,
     learn,
     potential,
-    code
+    code,
+    total
   }
   return (
     <Router>

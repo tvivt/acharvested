@@ -1,21 +1,26 @@
+import { donateAddress } from '../../shared';
 import './index.css';
 
 const Learn = (props) => {
-  const { code } = props;
+  const { code, total, learn } = props;
 
-  const tempFunc = () => {
+  const renderFunc = () => {
     if (code === 99) {
       return null
     }
     if (code === 0 || code === 10){
-      return 'COME SOON';
+      return learn.map((v) => {
+        return (
+          <div>123</div>
+        )
+      });
     }
     if (code === 1){
       return 'Unable Verify';
     }
   }
 
-  const tempText = tempFunc();
+  const renderStudy = renderFunc();
 
   return (
     <div className='learn-container'>
@@ -29,12 +34,27 @@ const Learn = (props) => {
         </div>
       </div>
       <div className='learn-content'>
-        <div className='learn-premium-temp'>
-          <h2>Nobody knows future airdrops. But we can guess and hope to be right! </h2>
-          <p>How adding allowlist ?</p>
-          <p>COME SOON</p> 
+        <h1 className='text-base'>
+          ACHARVESTED provides no financial advice, you are liable for any and all crypto activity you do.
+        </h1>
+        <h1 className='text-base'>
+          ACHARVESTED provides no guarantee these will be future airdrops, by reading below, you understand that ACHARVESTED if providing advice as a guess. 
+        </h1>
+        <h1 className='text-base'>
+          Millions of dollars are released in airdrops to early crypto users. But Nobody knows future airdrops. we can guess and hope to be right! 
+        </h1>
+        <div className='learn-collection'>
+          {renderStudy}
         </div>
-        {tempText}
+        <div className='learn-how-added'>
+          <p className='text-2xl' style={{marginBottom: '5px'}}>How adding allowlist ?</p>
+          <p className='text-sm'>* send $120 USDT/year to {donateAddress}</p>
+          <p className='text-sm'>* send TX, address and your email to foricepy@gmail.com</p>
+          <p className='text-sm'>* added in allowlist to within one working day</p>
+        </div>
+        <div className='learn-subscrib-total'>
+          Subscribers {total}+
+        </div>
       </div>
     </div>
   )
