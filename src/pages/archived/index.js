@@ -60,7 +60,7 @@ const Archived = (props) => {
         <div className='archived-header'>
           <h1 className='archived-header-title text-white'>空投归档</h1>
           <h4 className='archived-header-des text-gray-50'>
-            我们在这里挑选了一系列历史空投让你来了解.
+            归档曾经发生的一系列空投来让您了解
           </h4>
         </div>
       </div>

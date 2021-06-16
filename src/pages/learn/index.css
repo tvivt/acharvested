@@ -68,8 +68,14 @@
 }
 .learn-subscrib-total{
   margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 .learn-collection{
   margin-top: 30px;
+}
+
+.learn-padding{
+  padding-left: 20px;
+  padding-right: 5px;
 }
