@@ -1,12 +1,5 @@
 .archived-container{
   width: 100%;
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  color: #1a1a1a;
   position: relative;
 }
 
@@ -15,6 +8,15 @@
     margin: 0 auto;
     width: 928px;
   } 
+}
+
+.archived-contents{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  color: #1a1a1a;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .archived-header-bg{
@@ -45,6 +47,9 @@
 .archived-header-title{
   font-size: 36px;
   font-weight: bold;
+}
+.archived-header-des{
+  font-size: 14px;
 }
 
 .archived-box{
