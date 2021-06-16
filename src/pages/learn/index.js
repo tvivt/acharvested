@@ -39,13 +39,13 @@ const Learn = (props) => {
       <div className='learn-content'>
         <div>
           <p className='text-xl' style={{marginBottom: '5px'}}>同意声明</p>
-          <p className='text-sm learn-padding'>
+          <p className='text-xs learn-padding'>
             * ACHARVESTED 不提供任何财务建议，您应对您所做的任何和所有加密活动负责。
           </p>
-          <p className='text-sm learn-padding'>
+          <p className='text-xs learn-padding'>
             * ACHARVESTED 不保证这些将是未来的空投，您应该明白 ACHARVESTED 仅提供建议作为猜测。
           </p>
-          <p className='text-sm learn-padding'>
+          <p className='text-xs learn-padding'>
             * 数百万美元以空投形式发放给早期的加密货币用户，但没有人知道未来的空投，我们可以猜测并希望是对的！
           </p>
         </div>
@@ -56,13 +56,13 @@ const Learn = (props) => {
 
         <div className='learn-how-added'>
           <p className='text-xl' style={{marginBottom: '5px'}}>如何加入许可名单 ?</p>
-          <p className='text-sm learn-padding'>* 访问服务为 120 USDT/年，请发送 120 USDT 至 {donateAddress}</p>
-          <p className='text-sm learn-padding'>* 发送 TX, 钱包地址（必须和发送 120 USDT地址相同）和 邮箱到 foricepy@gmail.com</p>
-          <p className='text-sm learn-padding'>* 在一个工作日内（周末顺延至工作日）添加至许可名单中</p>
+          <p className='text-xs learn-padding'>* 访问服务为 120 USDT/年，请发送 120 USDT 至 {donateAddress}</p>
+          <p className='text-xs learn-padding'>* 发送 TX, 钱包地址（必须和发送 120 USDT地址相同）和 邮箱到 foricepy@gmail.com</p>
+          <p className='text-xs learn-padding'>* 在一个工作日内（周末顺延至工作日）添加至许可名单中</p>
         </div>
         <div className='learn-subscrib-total'>
           <p className='text-xl' style={{marginBottom: '5px'}}>实时数据：</p>
-          <p className='text-sm learn-padding'>* 订阅用户： ({total})+</p>
+          <p className='text-xs learn-padding'>* 订阅用户： ({total})+</p>
         </div>
       </div>
     </div>
