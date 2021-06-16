@@ -7,8 +7,8 @@ import Learn from './pages/learn';
 import Header from './Header';
 import './App.css';
 
-// const zh_CN = 'zh_CN';
-const en_US = 'en_US';
+const zh_CN = 'zh_CN';
+// const en_US = 'en_US';
 
 function WrappedPageComponent(Component, depend){
   return (props) => {
@@ -27,7 +27,7 @@ function WrappedPageComponent(Component, depend){
 
 function App(){
   const [code, setCode] = useState(99)
-  const [language, setLanguage] = useState(en_US)
+  const [language, setLanguage] = useState(zh_CN)
   const [address, setAddress] = useState('');
   const [learn, setLearn] = useState([]);
   const [potential, setPotential] = useState([]);

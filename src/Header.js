@@ -4,7 +4,19 @@ import classnames from 'classnames';
 import { createSign, getNonce, verify, donateAddress, donateEtherscan, truncated } from './shared'
 import Logo from './images/shuidao.png';
 import MetamaskSVG from './images/metamask-fox.svg';
+import GithubPNG from './images/github.png';
 import './Header.css';
+
+
+// Verify
+// Connect Wallet
+// Unable Verify
+// Learn
+// Archived
+// Potential
+// Open Source
+// Donate
+
 
 const Header = (props) => {
   const { callbackToRootComponent, address, learn, potential, code } = props;
@@ -95,13 +107,13 @@ const Header = (props) => {
     'app-menu-content open animated': dropdown 
   });
 
-  const metamaskText = address ? 'Verify' : 'Connect Wallet';
+  const metamaskText = address ? '验证' : '连接';
   const renderMetamaskContainer = () => {
     if (code === 0 || code === 10){
       return <div className='app-metamask-text'>{truncated(address)}</div>
     }
     if (code === 1){
-      return 'Unable Verify';
+      return <span className='text-red-700'>失败</span>;
     }
     return (
       <div className='app-metamask-text' onClick={accessingAccount}>
@@ -132,28 +144,37 @@ const Header = (props) => {
               onClick={switchDropdown} 
               className='app-drop-link'
             >
-              <Link to='/'>Learn</Link>
+              <Link to='/'>学习</Link>
             </div>
             <div 
               className='app-drop-link' 
               onClick={switchDropdown}
             >
-              <Link to='/archived'>Archived</Link>
+              <Link to='/archived'>归档</Link>
             </div>
             <div
               onClick={switchDropdown}
               className='app-drop-link'
             >
-              <Link to='/potential'>Potential</Link>
+              <Link to='/potential'>潜在</Link>
             </div>
-            
             <div className='app-donate'>
-              Donate|捐赠（ethereum | binance）
+              捐赠（Ethereum | Binance）
               <a 
                 target='_blank'
                 rel="noreferrer"
                 href={donateEtherscan}>
                 {donateAddress}
+              </a>
+            </div>
+            <div className='app-open-source'>
+              <img className='app-github' src={GithubPNG} alt=''/>
+              <a 
+                href='https://github.com/icepy/acharvested'
+                target='_blank'
+                rel='noreferrer'
+              >
+                开源
               </a>
             </div>
             <div className='app-metamask-container'>

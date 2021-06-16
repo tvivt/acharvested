@@ -4,6 +4,9 @@ import archivedData from './archived.json';
 import { createUnique } from '../../shared';
 import './index.css';
 
+// Archived airdrops
+// We have a selected a history airdrops here for you to study.
+
 const Archived = (props) => {
   console.log('Archived', props);
   const { language } = props;
@@ -55,8 +58,10 @@ const Archived = (props) => {
     <div className='archived-container'>
       <div className='archived-header-bg'>
         <div className='archived-header'>
-          <h1 className='archived-header-title text-white'>Archived airdrops</h1>
-          <h4 className='archived-header-des text-gray-50'>We have a selected a history airdrops here for you to study.</h4>
+          <h1 className='archived-header-title text-white'>空投归档</h1>
+          <h4 className='archived-header-des text-gray-50'>
+            我们在这里挑选了一系列历史空投让你来了解.
+          </h4>
         </div>
       </div>
       <div className='archived-contents'>
@@ -91,7 +96,7 @@ const Archived = (props) => {
             </div>
             <div className='archived-modal-buttons'>
               <div className='archived-modal-button' onClick={closeModal}>
-                Cancel
+                取消
               </div>
             </div>
           </ReactModal>
