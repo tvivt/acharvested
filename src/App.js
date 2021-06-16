@@ -59,9 +59,9 @@ function App(){
           }
         }}
       />
-      <Route path='/' component={WrappedPageComponent(Home, depend)} exact />
-      <Route path='/archived' component={WrappedPageComponent(Archived, depend)} />
+      <Route path='/' component={WrappedPageComponent(Archived, depend)} exact/>
       <Route path='/learn' component={WrappedPageComponent(Learn, depend)} />
+      <Route path='/potential' component={WrappedPageComponent(Home, depend)}/>
     </Router>
   )
 }

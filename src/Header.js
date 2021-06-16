@@ -139,21 +139,21 @@ const Header = (props) => {
               onClick={switchDropdown} 
               className='app-drop-link'
             >
-              <Link to='/'>Home</Link>
+              <Link to='/learn'>Learn</Link>
             </div>
-            <div
-              onClick={switchDropdown} 
-              className='app-drop-link'
+            <div 
+              className='app-drop-link' 
+              onClick={switchDropdown}
             >
-                <Link to='/learn'>Learn</Link>
+              <Link to='/'>Archived</Link>
             </div>
             <div
               onClick={switchDropdown}
               className='app-drop-link'
             >
-              <Link to='/'>Potential</Link>
+              <Link to='/potential'>Potential</Link>
             </div>
-            <div className='app-drop-link' onClick={switchDropdown}><Link to='/archived'>Archived</Link></div>
+            
             <div className='app-donate'>
               Donate|捐赠（ethereum | binance）
               <a 

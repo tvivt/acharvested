@@ -1,5 +1,6 @@
 .learn-container{
   width: 100%;
+  padding-top: 10px;
 }
 
 @media screen and (min-width: 768px) {
@@ -43,5 +44,13 @@
 }
 
 .learn-content{
+  margin-top: 10px;
+}
+
+.learn-premium-temp{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin-top: 10px;
 }

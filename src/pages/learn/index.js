@@ -22,11 +22,18 @@ const Learn = (props) => {
       <div className='learn-header-bg'>
         <div className='learn-header-titles'>
           <h1 className='learn-header-title text-white'>Learn about airdrops</h1>
-          <h4 className='learn-header-des text-gray-50'>New airdrops are released often. By following the below tips, you can improve your chances.
-    Want to learn how?</h4>
+          <h4 className='learn-header-des text-gray-50'>
+            New airdrops are released often. By following the below tips, you can improve your chances.
+    Want to learn how?
+          </h4>
         </div>
       </div>
       <div className='learn-content'>
+        <div className='learn-premium-temp'>
+          <h2>Nobody knows future airdrops. But we can guess and hope to be right! </h2>
+          <p>How adding allowlist ?</p>
+          <p>COME SOON</p> 
+        </div>
         {tempText}
       </div>
     </div>

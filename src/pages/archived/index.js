@@ -53,6 +53,12 @@ const Archived = (props) => {
   
   return (
     <div className='archived-container'>
+      <div className='archived-header-bg'>
+        <div className='archived-header'>
+          <h1 className='archived-header-title text-white'>Archived airdrops</h1>
+          <h4 className='archived-header-des text-gray-50'>We have a selected a history airdrops here for you to study.</h4>
+        </div>
+      </div>
       { renderList }
       {
         modalContent ? (
