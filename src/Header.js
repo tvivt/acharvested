@@ -139,13 +139,13 @@ const Header = (props) => {
               onClick={switchDropdown} 
               className='app-drop-link'
             >
-              <Link to='/learn'>Learn</Link>
+              <Link to='/'>Learn</Link>
             </div>
             <div 
               className='app-drop-link' 
               onClick={switchDropdown}
             >
-              <Link to='/'>Archived</Link>
+              <Link to='/archived'>Archived</Link>
             </div>
             <div
               onClick={switchDropdown}
