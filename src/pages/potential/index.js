@@ -19,7 +19,7 @@ const Potential = (props) => {
     <div className='potential-container'>
       <div className='potential-header-bg'>
         <div className='potential-header-titles'>
-          <h1 className='potential-header-title text-white'>潜在空投</h1>
+          <h1 className='potential-header-title text-white'>研究潜在空投</h1>
           <h4 className='potential-header-des text-gray-50'>
             这是一系列可能进行空投的项目列表，用于预警和关注
           </h4>
