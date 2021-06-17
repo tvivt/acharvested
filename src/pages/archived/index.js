@@ -56,15 +56,6 @@ const Archived = (props) => {
   
   return (
     <div className='archived-container'>
-      <div className='archived-temp-gitcoin'>
-        <a 
-          href='https://gitcoin.co/grants/2755/acharvested'
-          target='_blank'
-          rel="noreferrer"
-        >
-          <img src='https://c.gitcoin.co/grants/d3b0cb7e881e97a8e2d409c37f2aaec6/GR10_Banner-_Explore.png' alt='' />
-        </a>
-      </div>
       <div className='archived-header-bg'>
         <div className='archived-header'>
           <h1 className='archived-header-title text-white'>归档空投</h1>

@@ -77,10 +77,14 @@ const Learn = (props) => {
         </div>
       </div>
       <div className='learn-content'>
+        <div className='learn-collection'>
+          <p className='text-xl' style={{marginBottom: '5px'}}>操作策略（9）</p>
+          {renderStudy}
+        </div>
         <div>
           <p className='text-xl' style={{marginBottom: '5px'}}>同意声明</p>
           <p className='text-xs learn-padding'>
-            * ACHARVESTED 不提供任何财务建议，您应对您所做的任何和所有加密活动负责。
+            * ACHARVESTED 不提供任何财务建议，您应对您所做的任何事情负责。
           </p>
           <p className='text-xs learn-padding'>
             * ACHARVESTED 不保证这些将是未来的空投，您应该明白 ACHARVESTED 仅提供建议作为猜测。
@@ -89,12 +93,6 @@ const Learn = (props) => {
             * 数百万美元以空投形式发放给早期的加密货币用户，但没有人知道未来的空投，我们可以猜测并希望是对的！
           </p>
         </div>
-        
-        <div className='learn-collection'>
-          <p className='text-xl' style={{marginBottom: '5px'}}>操作策略（9）</p>
-          {renderStudy}
-        </div>
-
         <div className='learn-how-added'>
           <p className='text-xl' style={{marginBottom: '5px'}}>如何加入许可名单列表 ?</p>
           <p className='text-xs learn-padding'>* 访问服务为 120 USDT/年，请发送 120 USDT 至 {donateAddress}</p>

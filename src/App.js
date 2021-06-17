@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router,Route } from 'react-router-dom';
 import { getTotal } from './shared';
-import Home from './pages/home';
 import Archived from './pages/archived';
 import Learn from './pages/learn';
+import Potential from './pages/potential';
 import Header from './Header';
 import './App.css';
 
@@ -77,7 +77,7 @@ function App(){
       
       <Route path='/' component={WrappedPageComponent(Archived, depend)} exact/>
       <Route path='/learn' component={WrappedPageComponent(Learn, depend)} />
-      <Route path='/potential' component={WrappedPageComponent(Home, depend)}/>
+      <Route path='/potential' component={WrappedPageComponent(Potential, depend)}/>
     </Router>
   )
 }
