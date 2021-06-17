@@ -7,6 +7,8 @@ import './index.css';
 // Archived airdrops
 // We have a selected a history airdrops here for you to study.
 
+const en_US = 'en_US';
+
 const Archived = (props) => {
   console.log('Archived', props);
   const { language } = props;
@@ -84,7 +86,7 @@ const Archived = (props) => {
               </div>
               <div>
                 {
-                  modalContent.rules[language].map((v, i) => {
+                  modalContent.rules[en_US].map((v, i) => {
                     return (
                       <div className='archived-modal-rules' key={createUnique()}>
                         <span className='rules-number'>{i+1}. </span>{v}
