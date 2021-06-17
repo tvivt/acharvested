@@ -10,8 +10,6 @@ import './index.css';
 const en_US = 'en_US';
 
 const Archived = (props) => {
-  console.log('Archived', props);
-  const { language } = props;
   const [list] = useState(archivedData.archived);
   const [openModal, setOpenModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
@@ -22,7 +20,7 @@ const Archived = (props) => {
   }
 
   const renderList = useMemo(() => {
-    console.log('renderList', list)
+    // console.log('renderList', list)
     return list.map((v) => {
       return (
         <div 
