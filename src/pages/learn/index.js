@@ -78,11 +78,11 @@ const Learn = (props) => {
       </div>
       <div className='learn-content'>
         <div className='learn-collection'>
-          <p className='text-xl' style={{marginBottom: '5px'}}>操作策略（9）</p>
+          <p className='text-lg text-gray-900' style={{marginBottom: '5px'}}>操作策略（9）</p>
           {renderStudy}
         </div>
-        <div>
-          <p className='text-xl' style={{marginBottom: '5px'}}>同意声明</p>
+        <div className='text-gray-500'>
+          <p className='text-lg text-gray-900' style={{marginBottom: '5px'}}>同意声明</p>
           <p className='text-xs learn-padding'>
             * ACHARVESTED 不提供任何财务建议，您应对您所做的任何事情负责。
           </p>
@@ -93,14 +93,14 @@ const Learn = (props) => {
             * 数百万美元以空投形式发放给早期的加密货币用户，但没有人知道未来的空投，我们可以猜测并希望是对的！
           </p>
         </div>
-        <div className='learn-how-added'>
-          <p className='text-xl' style={{marginBottom: '5px'}}>如何加入许可名单列表 ?</p>
+        <div className='learn-how-added text-gray-500'>
+          <p className='text-lg text-gray-900' style={{marginBottom: '5px'}}>如何加入许可名单列表 ?</p>
           <p className='text-xs learn-padding'>* 访问服务为 120 USDT/年，请发送 120 USDT 至 {donateAddress}</p>
           <p className='text-xs learn-padding'>* 请发送 TX, 钱包地址（必须和发送 120 USDT地址相同）和 邮箱至 foricepy@gmail.com</p>
           <p className='text-xs learn-padding'>* 在一个工作日内（周末顺延至工作日）添加至许可名单列表</p>
         </div>
-        <div className='learn-subscrib-total'>
-          <p className='text-xl' style={{marginBottom: '5px'}}>实时数据：</p>
+        <div className='learn-subscrib-total text-gray-500'>
+          <p className='text-lg text-gray-900' style={{marginBottom: '5px'}}>实时数据：</p>
           <p className='text-xs learn-padding'>* 订阅用户： ({total})+</p>
         </div>
       </div>
