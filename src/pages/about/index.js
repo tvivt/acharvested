@@ -26,7 +26,7 @@ const About = (props) => {
             >
               <div className='about-item'>
                 <img src={GithubPNG} alt='' style={{marginRight: '5px'}} />
-                前端项目开源
+                前端项目
               </div>
             </a>
             <a 
@@ -35,9 +35,9 @@ const About = (props) => {
               rel='noreferrer'
               className='text-gray-500 text-sm'
             >
-              <div className='about-item'>
+              <div className='about-item' style={{marginRight: '10px'}}>
                 <img src={TwitterPNG} alt='' style={{marginRight: '5px'}} />
-                @foricepy
+                @FORICEPY
               </div>
             </a>
             <a 
@@ -48,7 +48,7 @@ const About = (props) => {
             >
               <div className='about-item'>
                 <img src={GitcoinPNG} alt='' />
-                欢迎捐赠
+                捐赠支持
               </div>
             </a>
           </div>
