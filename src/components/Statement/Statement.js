@@ -20,7 +20,7 @@ const Statement = (props) => {
       <div className='statement-how-added text-gray-500 text-sm'>
         <p className='text-lg text-gray-900' style={{marginBottom: '5px'}}>如何加入许可名单列表 ?</p>
         <p className='statement-padding'>* 访问服务为 120 USDT/年，请发送 120 USDT 至 {donateAddress}</p>
-        <p className='statement-padding'>* 请发送 TX, 钱包地址（必须和发送 120 USDT地址相同）和 邮箱至 foricepy@gmail.com</p>
+        <p className='statement-padding'>* 然后发送 TX, 钱包地址（必须和发送 120 USDT地址相同）和 邮箱至 foricepy@gmail.com</p>
         <p className='statement-padding'>* 在一个工作日内（周末顺延至工作日）添加至许可名单列表</p>
       </div>
       <div className='statement-subscrib-total text-gray-500 text-sm'>
