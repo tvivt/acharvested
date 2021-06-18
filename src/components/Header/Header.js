@@ -1,11 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import { createSign, getNonce, verify, truncated } from './shared'
-import Logo from './images/shuidao.png';
-import MetamaskSVG from './images/metamask-fox.svg';
-import GithubPNG from './images/github.png';
-import DonatePNG from './images/donate.png';
+import { createSign, getNonce, verify, truncated } from '../../shared'
+import Logo from '../../images/shuidao.png';
+import MetamaskSVG from '../../images/metamask-fox.svg';
 import './Header.css';
 
 
@@ -159,24 +157,10 @@ const Header = (props) => {
             >
               <Link to='/potential'>潜在</Link>
             </div>
-            <div className='app-donate'>
-              <img className='app-donate-png' src={DonatePNG} alt='' />
-              <a 
-                target='_blank'
-                rel='noreferrer'
-                href='https://gitcoin.co/grants/2755/acharvested'>
-                捐赠
-              </a>
-            </div>
-            <div className='app-open-source'>
-              <img className='app-github' src={GithubPNG} alt=''/>
-              <a 
-                href='https://github.com/icepy/acharvested'
-                target='_blank'
-                rel='noreferrer'
-              >
-                开源
-              </a>
+            <div
+              onClick={switchDropdown}
+            >
+              <Link to='/about'>关于</Link>
             </div>
             <div className='app-metamask-container'>
               <img 

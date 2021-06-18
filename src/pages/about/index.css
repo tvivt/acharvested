@@ -1,0 +1,46 @@
+.about-container{
+  width: 100%;
+  position: relative;
+}
+
+
+@media screen and (min-width: 768px) {
+  .about-container{
+    margin: 0 auto;
+    width: 928px;
+  } 
+}
+
+.about-content{
+  margin-top: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.about-cooperation{
+  margin-bottom: 30px;
+}
+
+.about-social-network{
+  margin-bottom: 30px;
+}
+
+.about-items{
+  display: flex;
+  flex-direction: row;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.about-items .about-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 25px;
+}
+
+.about-items .about-item img{
+  width: 30px;
+  height: 30px;
+}

@@ -4,7 +4,8 @@ import { getTotal } from './shared';
 import Archived from './pages/archived';
 import Learn from './pages/learn';
 import Potential from './pages/potential';
-import Header from './Header';
+import About from './pages/about';
+import Header from './components/Header/Header';
 import './App.css';
 
 const zh_CN = 'zh_CN';
@@ -31,14 +32,14 @@ function App(){
   const [address, setAddress] = useState('');
   const [learn, setLearn] = useState([]);
   const [potential, setPotential] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(null);
 
   useEffect(() => {
-    if (total === 0){
+    if (!total){
       getTotal().then((response) => {
         const { code: remoteCode, data } = response.data;
         if (remoteCode === 0){
-          setTotal(data.total)
+          setTotal(data)
         }
       });
     }
@@ -78,6 +79,7 @@ function App(){
       <Route path='/' component={WrappedPageComponent(Archived, depend)} exact/>
       <Route path='/learn' component={WrappedPageComponent(Learn, depend)} />
       <Route path='/potential' component={WrappedPageComponent(Potential, depend)}/>
+      <Route path='/about' component={WrappedPageComponent(About, depend)} />
     </Router>
   )
 }
