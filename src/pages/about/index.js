@@ -10,7 +10,7 @@ const About = (props) => {
   return (
     <div className='about-container'>
       
-      <div className='about-content text-gray-500 text-sm'>
+      <div className='about-content text-gray-500 text-xs'>
         <div className='about-cooperation'>
           <p className='text-lg text-gray-900' style={{marginBottom: '5px'}}>社区合作</p>
           <div>即将到来</div>
@@ -22,7 +22,7 @@ const About = (props) => {
               href='https://github.com/icepy/acharvested'
               target='_blank'
               rel='noreferrer'
-              className='text-gray-500 text-sm'
+              className='text-gray-500 text-xs'
             >
               <div className='about-item'>
                 <img src={GithubPNG} alt='' style={{marginRight: '5px'}} />
@@ -33,7 +33,7 @@ const About = (props) => {
               href='https://twitter.com/foricepy'
               target='_blank'
               rel='noreferrer'
-              className='text-gray-500 text-sm'
+              className='text-gray-500 text-xs'
             >
               <div className='about-item' style={{marginRight: '10px'}}>
                 <img src={TwitterPNG} alt='' style={{marginRight: '5px'}} />
@@ -44,7 +44,7 @@ const About = (props) => {
               href='https://gitcoin.co/grants/2755/acharvested'
               target='_blank'
               rel='noreferrer'
-              className='text-gray-500 text-sm'
+              className='text-gray-500 text-xs'
             >
               <div className='about-item'>
                 <img src={GitcoinPNG} alt='' />

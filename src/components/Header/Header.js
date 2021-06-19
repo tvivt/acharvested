@@ -126,10 +126,10 @@ const Header = (props) => {
       <div className={animatedClass} style={{position: 'fixed'}}>
         <div className='app-menu-top'>
           <div className='app-menu-container'>
-            <a href='/' className='app-menu-headline'>
+            <Link to='/' className='app-menu-headline'>
               <img src={Logo} className='app-logo' alt=''/>
-              <span className='app-name'>ACHARVESTED</span>
-            </a>
+              <span className='app-name text-gray-600'>桑田</span>
+            </Link>
             <div className='app-menu-buttons'>
               <button className='app-menu-button' onClick={switchDropdown}>
                 <svg t="1623746491501" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1847" width="30" height="30"><path d="M685.909333 85.333333h144.426667A108.757333 108.757333 0 0 1 938.666667 194.56v145.706667a108.757333 108.757333 0 0 1-108.330667 109.226666h-144.426667a108.757333 108.757333 0 0 1-108.330666-109.226666V194.56A108.757333 108.757333 0 0 1 685.909333 85.333333" fill="#8a8a8a" opacity=".4" p-id="1848"></path><path d="M338.090667 574.549333a108.757333 108.757333 0 0 1 108.330666 109.226667v145.664A108.8 108.8 0 0 1 338.090667 938.666667H193.706667A108.8 108.8 0 0 1 85.333333 829.44v-145.706667a108.757333 108.757333 0 0 1 108.330667-109.226666h144.426667z m492.245333 0A108.757333 108.757333 0 0 1 938.666667 683.776v145.664A108.8 108.8 0 0 1 830.336 938.666667h-144.426667a108.8 108.8 0 0 1-108.330666-109.226667v-145.706667a108.757333 108.757333 0 0 1 108.330666-109.226666h144.426667zM338.090667 85.333333a108.757333 108.757333 0 0 1 108.330666 109.226667v145.706667a108.757333 108.757333 0 0 1-108.330666 109.226666H193.706667A108.757333 108.757333 0 0 1 85.333333 340.224V194.56A108.757333 108.757333 0 0 1 193.664 85.333333h144.426667z" fill="#8a8a8a" p-id="1849"></path></svg>

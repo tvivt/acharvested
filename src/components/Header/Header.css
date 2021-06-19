@@ -46,8 +46,13 @@
 }
 
 .app-menu-container .app-logo{
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
+}
+
+.app-menu-container .app-name{
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .app-menu-container .app-menu-buttons{
