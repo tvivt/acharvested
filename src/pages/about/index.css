@@ -17,6 +17,19 @@
   padding-right: 10px;
 }
 
+.about-name{
+  margin-bottom: 30px;
+}
+
+.about-introduction{
+  margin-bottom: 30px;
+}
+
+.introduction-padding{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .about-cooperation{
   margin-bottom: 30px;
 }
