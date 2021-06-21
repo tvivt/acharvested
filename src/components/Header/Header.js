@@ -77,6 +77,7 @@ const Header = (props) => {
               code: 1
             });
           }
+          setDropdown(!dropdown);
         })
       }).catch(() => {
         window.location.reload();
