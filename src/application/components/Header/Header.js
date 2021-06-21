@@ -1,9 +1,26 @@
 import { useEffect, useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import { createSign, getNonce, verify, truncated } from '../../shared'
-import Logo from '../../images/shuidao.png';
-import MetamaskSVG from '../../images/metamask-fox.svg';
+import { 
+  createSign,
+  fetchNonceByServerless,
+  fetchVerifyResultByServerless,
+  truncated
+} from '../../shared';
+import {
+  getAddress,
+  setAddress,
+  getNonce,
+  setNonce
+} from '../../store/user';
+import {
+  getLearn,
+  getCode,
+  setPremiumDataSource
+} from '../../store/premium';
+import Logo from '../../../images/shuidao.png';
+import MetamaskSVG from '../../../images/metamask-fox.svg';
 import './Header.css';
 
 
@@ -18,17 +35,20 @@ import './Header.css';
 
 
 const Header = (props) => {
-  const { callbackToRootComponent, address, learn, potential, code } = props;
+  const dispatch = useDispatch();
+  const address = useSelector(getAddress);
+  const nonce = useSelector(getNonce);
+  const learn = useSelector(getLearn);
+  const code = useSelector(getCode);
   const timer = useRef(null);
   const [dropdown, setDropdown] = useState(false);
-  const [nonce, setNonce] = useState('');
 
   useEffect(() => {
     if (!nonce){
-      getNonce().then((response) => {
+      fetchNonceByServerless().then((response) => {
         const { code, data } = response.data;
         if (code === 0){
-          setNonce(data.nonce);
+          dispatch(setNonce(data.nonce));
         }
       });
     }
@@ -38,14 +58,12 @@ const Header = (props) => {
         timer.current = setInterval(() => {
           if (window.ethereum.selectedAddress){
             clearInterval(timer.current);
-            callbackToRootComponent({
-              address: window.ethereum.selectedAddress
-            });
+            dispatch(setAddress(window.ethereum.selectedAddress))
           }
         },1000);
       }
     }
-  }, [callbackToRootComponent, nonce]);
+  }, [dispatch, nonce]);
 
   const accessingAccount = () => {
     if (!address && typeof window.ethereum !== 'undefined'){
@@ -53,29 +71,29 @@ const Header = (props) => {
         if (timer.current){
           clearInterval(timer.current);
         }
-        callbackToRootComponent({
-          address: accounts[0]
-        });
+        dispatch(setAddress(accounts[0]));
       });
     } else {
-      if (learn.length > 0 || potential.length > 0){
+      if (learn.length > 0){
         return;
       }
       createSign(nonce, address).then((sign) => {
-        verify(nonce, sign, address).then((response) => {
+        fetchVerifyResultByServerless(nonce, sign, address).then((response) => {
           const { code: remoteCode, data } = response.data;
           if (remoteCode === 0 || remoteCode === 10){
-            callbackToRootComponent({
+            dispatch(setPremiumDataSource({
               learn: data.learn,
               potential: data.potential,
+              yuque: data.yuque,
               code: remoteCode
-            });
+            }))
           } else {
-            callbackToRootComponent({
+            dispatch(setPremiumDataSource({
               learn: [],
               potential: [],
+              yuque: [],
               code: 1
-            });
+            }));
           }
           setDropdown(!dropdown);
         })

@@ -74,3 +74,14 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+.learn-get{
+  margin-bottom: 20px;
+  color: #374151;
+  font-size: 14px;
+}
+
+.learn-get a{
+  color: #374151;
+  font-size: 14px;
+}

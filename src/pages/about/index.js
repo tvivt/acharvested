@@ -1,13 +1,14 @@
-import './index.css';
-import Statement from '../../components/Statement/Statement';
+import { useSelector } from 'react-redux';
+import { getAccountTotal, getPriceTotal } from '../../application/store/total';
+import Statement from '../../application/components/Statement/Statement';
 import GithubPNG from '../../images/github.png';
 import TwitterPNG from '../../images/twitter.png';
 import GitcoinPNG from '../../images/gitcoin.png';
+import './index.css';
 
-const About = (props) => {
-  const { total } = props;
-  const accountTotal = !total ? 0 : total.account_total;
-  const priceTotal = !total ? 0 : total.price_total || 0;
+const About = () => {
+  const accountTotal = useSelector(getAccountTotal)
+  const priceTotal = useSelector(getPriceTotal)
   return (
     <div className='about-container'>
       

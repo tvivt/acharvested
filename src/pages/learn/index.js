@@ -1,5 +1,9 @@
+import { useSelector } from 'react-redux';
+import { getLearn, getCode, getYuque } from '../../application/store/premium';
+import { getLearnTotal } from '../../application/store/total';
+import { getLanguage } from '../../application/store/user';
 import { Link } from 'react-router-dom';
-import Card from '../../components/Card/Card';
+import Card from '../../application/components/Card/Card';
 import './index.css';
 
 
@@ -11,9 +15,11 @@ import './index.css';
 // added in allowlist to within one working day
 
 const Learn = (props) => {
-  const { code, total, language, learn } = props;
-  const learnTotal = !total ? 0 : total.learn_total;
-  
+  const code = useSelector(getCode);
+  const learn = useSelector(getLearn);
+  const learnTotal = useSelector(getLearnTotal);
+  const language = useSelector(getLanguage);
+  const learnYuQue = useSelector(getYuque)[0];
   const renderFunc = () => {
     if (code === 99) {
       return (
@@ -52,7 +58,24 @@ const Learn = (props) => {
     }
   }
 
-  const renderStudy = renderFunc();
+  const renderYuque = () => {
+    if (!learnYuQue){
+      return ''
+    }
+    return (
+      <>
+        <p className='text-lg text-gray-900' style={{marginBottom: '5px'}}>
+          图文指南（{learnTotal}）
+        </p>
+        <div className='learn-get'>
+          <span style={{marginRight: '5px'}}>使用密码 {learnYuQue.password} 来访问</span>
+          <a href={learnYuQue.url}>
+            {learnYuQue.url}
+          </a>
+        </div>
+      </>
+    )
+  }
 
   return (
     <div className='learn-container'>
@@ -68,10 +91,11 @@ const Learn = (props) => {
       </div>
       <div className='learn-content'>
         <div className='learn-collection'>
+          {renderYuque()}
           <p className='text-lg text-gray-900' style={{marginBottom: '5px'}}>
             操作策略（{learnTotal}）
           </p>
-          {renderStudy}
+          {renderFunc()}
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import ReactModal from 'react-modal';
 import archivedData from './archived.json';
-import { createUnique } from '../../shared';
+import { createUnique } from '../../application/shared';
 import './index.css';
 
 // Archived airdrops

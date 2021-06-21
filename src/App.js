@@ -1,25 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router,Route } from 'react-router-dom';
-import { getTotal } from './shared';
+import { fetchTotalByServerless } from './application/shared';
+import { setAllTotal } from './application/store/total'
 import Archived from './pages/archived';
 import Learn from './pages/learn';
 import Potential from './pages/potential';
 import About from './pages/about';
-import Header from './components/Header/Header';
+import Header from './application/components/Header/Header';
 import './App.css';
-
-const zh_CN = 'zh_CN';
-// const en_US = 'en_US';
-
-function WrappedPageComponent(Component, depend){
-  return (props) => {
-    const newProps = {
-      ...props,
-      ...depend
-    }
-    return <Component {...newProps}/>
-  }
-}
+import { useRef } from 'react';
 
 // code 99 初始化状态
 // code 0 成功
@@ -27,59 +17,32 @@ function WrappedPageComponent(Component, depend){
 // code 10 特殊状态
 
 function App(){
-  const [code, setCode] = useState(99)
-  const [language, setLanguage] = useState(zh_CN)
-  const [address, setAddress] = useState('');
-  const [learn, setLearn] = useState([]);
-  const [potential, setPotential] = useState([]);
-  const [total, setTotal] = useState(null);
-
+  const dispatch = useDispatch();
+  const lock = useRef(true);
   useEffect(() => {
-    if (!total){
-      getTotal().then((response) => {
+    if (lock.current){
+      lock.current = false;
+      fetchTotalByServerless().then((response) => {
         const { code: remoteCode, data } = response.data;
         if (remoteCode === 0){
-          setTotal(data)
+          dispatch(setAllTotal({
+            accountTotal: data.account_total,
+            learnTotal: data.learn_total,
+            potentialTotal: data.potential_total,
+            priceTotal: data.price_total
+          }))
         }
-      });
+      })
     }
-  },[total])
+  },[dispatch])
 
-  const depend = {
-    language,
-    address,
-    learn,
-    potential,
-    code,
-    total
-  }
   return (
     <Router>
-      <Header
-        {...depend}
-        callbackToRootComponent={(headerState) => {
-          if (typeof headerState.code === 'number' && code !== headerState.code){
-            setCode(headerState.code);
-          }
-          if (headerState.language && language !== headerState.language){
-            setLanguage(headerState.language);
-          }
-          if (headerState.address && address !== headerState.address){
-            setAddress(headerState.address);
-          }
-          if (headerState.learn && headerState.learn.length > 0){
-            setLearn(headerState.learn);
-          }
-          if (headerState.potential && headerState.potential.length > 0){
-            setPotential(headerState.potential);
-          }
-        }}
-      />
-      
-      <Route path='/' component={WrappedPageComponent(Archived, depend)} exact/>
-      <Route path='/learn' component={WrappedPageComponent(Learn, depend)} />
-      <Route path='/potential' component={WrappedPageComponent(Potential, depend)}/>
-      <Route path='/about' component={WrappedPageComponent(About, depend)} />
+      <Header/>
+      <Route path='/' component={Archived} exact/>
+      <Route path='/learn' component={Learn} />
+      <Route path='/potential' component={Potential}/>
+      <Route path='/about' component={About} />
     </Router>
   )
 }

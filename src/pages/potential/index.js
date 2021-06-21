@@ -1,10 +1,16 @@
+import { useSelector } from 'react-redux';
+import { getCode, getPotential } from '../../application/store/premium';
+import { getPotentialTotal } from '../../application/store/total';
+import { getLanguage } from '../../application/store/user';
 import { Link } from 'react-router-dom';
-import Card from '../../components/Card/Card';
+import Card from '../../application/components/Card/Card';
 import './index.css'
 
-const Potential = (props) => {
-  const { code, total, language, potential } = props;
-  const potentialTotal = !total ? 0 : total.potential_total;
+const Potential = () => {
+  const code = useSelector(getCode);
+  const potential = useSelector(getPotential);
+  const potentialTotal = useSelector(getPotentialTotal);
+  const language = useSelector(getLanguage);
   const renderFunc = () => {
     if (code === 99) {
       return (

@@ -25,21 +25,21 @@ export const createSign = (nonce, address) => {
 
 const baseHost = process.env.NODE_ENV === 'development' ? '' : 'https://airdrop.acharvested.me';
 
-export const getTotal = () => {
+export const fetchTotalByServerless = () => {
   const url = `${baseHost}/api/total`;
   return axios({
     url
   });
 }
 
-export const getNonce = () => {
+export const fetchNonceByServerless = () => {
   const url = `${baseHost}/api/nonce`;
   return axios({
     url
   });
 }
 
-export const verify = (nonce, sign, address) => {
+export const fetchVerifyResultByServerless = (nonce, sign, address) => {
   const url = `${baseHost}/api/verify`;
   return axios({
     url,
@@ -86,7 +86,7 @@ export const isMobile = /(iphone|ipad|ipod|ios|android)/i.test(userAgentInfo);
 export const donateAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
 export const donateEtherscan = 'https://cn.etherscan.com/address/0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
 
-export function truncated(f){
+export const truncated = (f) => {
   if (!f) return '';
   return f.substr(0,5) + '...' + f.substr(f.length - 5);
 }
