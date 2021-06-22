@@ -15,12 +15,12 @@ const Potential = () => {
     if (code === 99) {
       return (
         <>
-          <span style={{color: '#f6851B', fontSize: '14px'}}>
+          <div style={{marginLeft: '10px', marginBottom: '5px', fontSize: '14px'}}>
             使用去中心化钱包签名验证地址所有权以访问受限内容
-          </span>
-          <span style={{marginLeft: '10px', fontSize: '14px'}}>
+          </div>
+          <div style={{marginLeft: '10px', fontSize: '14px'}}>
             <Link to='/about'>购买付费订阅-查看如何加入许可名单列表</Link>
-          </span>
+          </div>
         </>
       )
     }
@@ -45,12 +45,15 @@ const Potential = () => {
     if (code === 1){
       return (
         <>
-          <span className='text-red-800' style={{fontSize: '14px'}}>
+          <div 
+            className='text-red-800' 
+            style={{marginLeft: '10px', marginBottom: '5px', fontSize: '14px'}}
+          >
             无法验证，原因是您不在许可名单内! 
-          </span>
-          <span style={{marginLeft: '10px', fontSize: '14px'}}>
+          </div>
+          <div style={{marginLeft: '10px', fontSize: '14px'}}>
             <Link to='/about'>购买付费订阅-查看如何加入许可名单列表</Link>
-          </span>
+          </div>
         </>
       )
     }
