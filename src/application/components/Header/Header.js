@@ -21,6 +21,7 @@ import {
 } from '../../store/premium';
 import Logo from '../../../images/shuidao.png';
 import MetamaskSVG from '../../../images/metamask-fox.svg';
+import IMTokenPNG from '../../../images/imtoken.png';
 import './Header.css';
 
 
@@ -124,9 +125,10 @@ const Header = (props) => {
     'app-menu-content animated': !dropdown,
     'app-menu-content open animated': dropdown 
   });
-
-  const metamaskText = address ? '验证' : '连接';
-  const renderMetamaskContainer = () => {
+  
+  const walletIcon = !!window.imToken ? IMTokenPNG : MetamaskSVG;
+  const walletText = address ? '验证' : '连接';
+  const renderWalletContainer = () => {
     if (code === 0 || code === 10){
       return <div className='app-metamask-text'>{truncated(address)}</div>
     }
@@ -135,7 +137,7 @@ const Header = (props) => {
     }
     return (
       <div className='app-metamask-text' onClick={accessingAccount}>
-        {metamaskText}
+        {walletText}
       </div>
     )
   }
@@ -183,11 +185,11 @@ const Header = (props) => {
             </div>
             <div className='app-metamask-container'>
               <img 
-                src={MetamaskSVG} 
+                src={walletIcon} 
                 className='app-metamask' 
                   alt=''
               />
-              {renderMetamaskContainer()}
+              {renderWalletContainer()}
             </div>
           </div>
         </div>

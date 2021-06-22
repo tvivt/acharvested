@@ -7,9 +7,11 @@ export const en_US = 'en_US';
 // imtoken
 // wallectconnect
 
+const usedType = !!window.imToken ? 'imtoken' : 'metamask';
+
 const initialState = {
   address: '',
-  usedType: '',
+  usedType,
   nonce: '',
   language: zh_CN
 }

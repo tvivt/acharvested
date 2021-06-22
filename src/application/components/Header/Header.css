@@ -129,6 +129,10 @@
   margin-bottom: 10px;
 }
 
+.app-drop-link a{
+  color: #374151;
+}
+
 .app-open-source{
   height: 30px;
   display: flex;
@@ -144,21 +148,23 @@
 }
 
 .app-metamask-container{
-  height: 50px;
+  height: 40px;
   display: flex;
   flex-direction: row;
   align-items: center;
   cursor: pointer;
+  padding-bottom: 2px;
 }
 
 .app-metamask{
   width: 30px;
   height: 30px;
   margin-right: 5px;
+  border-radius: 15px;
 }
 
 .app-metamask-text{
-  color: #f6851B;
+  color: #374151;
 }
 
 .app-eplacement{

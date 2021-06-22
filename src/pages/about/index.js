@@ -22,7 +22,7 @@ const About = () => {
           <div>即将到来</div>
         </div>
         <div className='about-social-network'>
-          <p className='text-lg text-gray-900' style={{marginBottom: '20px'}}>开源</p>
+          <p className='text-lg text-gray-900' style={{marginBottom: '5px'}}>开源</p>
           <div className='about-items'>
             <a 
               href='https://github.com/icepy/acharvested'
@@ -43,7 +43,7 @@ const About = () => {
             >
               <div className='about-item' style={{marginRight: '10px'}}>
                 <img src={TwitterPNG} alt='' style={{marginRight: '5px'}} />
-                @FORICEPY
+                @icepy
               </div>
             </a>
             <a 
