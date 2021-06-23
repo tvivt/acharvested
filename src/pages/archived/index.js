@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import archivedData from './archived.json';
 import { createUnique } from '../../application/shared';
@@ -9,11 +9,30 @@ import './index.css';
 
 const en_US = 'en_US';
 
-const Archived = (props) => {
+const Archived = () => {
   const [list] = useState(archivedData.archived);
+  const [item, setItem] = useState('');
   const [openModal, setOpenModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   
+  useEffect(() => {
+    const search = window.location.search;
+    if (search && !item){
+      const searchParams = new URLSearchParams(search.substr(1));
+      const getItem = searchParams.get('item').toLocaleUpperCase();
+      if (getItem){
+        const itemData = list.filter((v) => {
+          return v.token === getItem;
+        });
+        if (itemData.length > 0){
+          setItem(getItem);
+          setOpenModal(true);
+          setModalContent(itemData[0]);
+        }
+      }
+    }
+  }, [item, list])
+
   const closeModal = () => {
     setOpenModal(false);
     setModalContent(null);

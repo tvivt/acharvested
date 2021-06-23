@@ -12,7 +12,6 @@ const premiumSlice = createSlice({
   initialState,
   reducers: {
     setPremiumDataSource(state, action){
-      console.log('action', action)
       state.learn = action.payload.learn;
       state.potential = action.payload.potential;
       state.yuque = action.payload.yuque;
