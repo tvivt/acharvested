@@ -35,12 +35,12 @@ const Statement = (props) => {
       </div>
       <div className='statement-how-added text-gray-500 text-xs'>
         <p className='text-lg text-gray-900' style={{marginBottom: '5px'}}>价格</p>
-        <p className='statement-padding'>* 120 USDT/年</p>
+        <p className='statement-padding'>* 120 USD（等价 ETH 或 ERC20 稳定币）/年</p>
       </div>
       <div className='statement-how-added text-gray-500 text-xs'>
         <p className='text-lg text-gray-900' style={{marginBottom: '5px'}}>订阅</p>
-        <p className='statement-padding'>* 请发送 120 USDT 至 {donateAddress}</p>
-        <p className='statement-padding'>* 然后发送 TX, 钱包地址（必须和发送 120 USDT地址相同）和 邮箱至 foricepy@gmail.com</p>
+        <p className='statement-padding'>* 请发送 120 USD（等价 ETH 或 ERC20 稳定币） 至 {donateAddress}</p>
+        <p className='statement-padding'>* 然后发送 TX, 钱包地址（必须和发送 120 USD地址相同）和 邮箱至 foricepy@gmail.com</p>
         <p className='statement-padding'>* 在一个工作日内（周末顺延至工作日）添加至许可名单列表</p>
       </div>
       <div className='statement-subscrib-total text-gray-500 text-xs'>
