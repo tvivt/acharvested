@@ -46,7 +46,7 @@ const Statement = (props) => {
       <div className='statement-subscrib-total text-gray-500 text-xs'>
         <p className='text-lg text-gray-900' style={{marginBottom: '5px'}}>数据：</p>
         <p className='statement-padding'>* 付费订阅用户： ({accountTotal})+</p>
-        <p className='statement-padding'>* 已获得空投的价值：${priceTotal}</p>
+        <p className='statement-padding'>* 首页列出计算的总价值（按最低空投量）：${priceTotal}</p>
       </div>
     </>
   )
