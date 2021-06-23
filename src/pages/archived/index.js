@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import ReactModal from 'react-modal';
+import { parse } from 'usedjs/lib/querystring';
 import archivedData from './archived.json';
 import { createUnique } from '../../application/shared';
 import './index.css';
@@ -18,11 +19,12 @@ const Archived = () => {
   useEffect(() => {
     const search = window.location.search;
     if (search && !item){
-      const searchParams = new URLSearchParams(search.substr(1));
-      const getItem = searchParams.get('item').toLocaleUpperCase();
+      const searchParams = parse(search.substr(1));
+      const getItem = searchParams['item'];
       if (getItem){
+        const newGetItem = getItem.toLocaleUpperCase();
         const itemData = list.filter((v) => {
-          return v.token === getItem;
+          return v.token === newGetItem;
         });
         if (itemData.length > 0){
           setItem(getItem);

@@ -11279,6 +11279,11 @@ use@^3.1.0:
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
   integrity sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==
 
+usedjs@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/usedjs/-/usedjs-1.0.3.tgz#a8aea9a9c3845d873dcbf330f4f82db46d87b5d2"
+  integrity sha512-xihZv9SX8ESH7T2ifKs5L15xdhC8ATrZxkfmqAC0x7djwDQ+s3c/SB9p5k06Xqsqv7iR8AkaI1q+B1T/BgF1LQ==
+
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
