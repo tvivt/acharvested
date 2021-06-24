@@ -116,6 +116,13 @@ const Archived = () => {
               </div>
             </div>
             <div className='archived-modal-buttons'>
+              <div className='archived-modal-button archived-modal-button-link'>
+                <a
+                  href={modalContent.url}
+                  target='_blank'
+                  rel="noreferrer"
+                >跳转</a>
+              </div>
               <div className='archived-modal-button' onClick={closeModal}>
                 取消
               </div>

@@ -179,6 +179,15 @@
   border-radius: 5px;
 }
 
+.archived-modal-button-link{
+  margin-right: 15px;
+}
+
+.archived-modal-button-link a{
+  color: #fff;
+  display: block;
+}
+
 .archived-modal-rules{
   padding: 5px;
   font-size: 14px;
