@@ -3,8 +3,8 @@ import { createUnique } from '../../shared';
 import './index.css';
 
 const Card = (props) => {
-  const { language, dataSource } = props;
-  const { mark, direction } = dataSource;
+  const { language, dataSource, direction } = props;
+  const { mark } = dataSource;
   let markText = '';
   if (direction === 'potential' && mark === 1){
     markText = '热'

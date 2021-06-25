@@ -42,6 +42,10 @@
   color: #4B5563;
 }
 
+.card-title a{
+  font-size: 18px;
+}
+
 .card-content{
   padding-top: 5px;
 }
