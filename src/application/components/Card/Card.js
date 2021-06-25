@@ -1,10 +1,21 @@
+import classnames from 'classnames';
 import { createUnique } from '../../shared';
 import './index.css';
 
 const Card = (props) => {
   const { language, dataSource } = props;
   const { mark, direction } = dataSource;
-  const markText = direction === 'potential' && !mark ? '已发币' : '';
+  let markText = '';
+  if (direction === 'potential' && mark === 1){
+    markText = '热'
+  }
+  if (direction === 'potential' && mark === 2){
+    markText = '已发币'
+  }
+  const markTextClass = classnames({
+    'text-xs text-red-700': mark === 1,
+    'text-xs text-red-300': mark === 2
+  });
   return (
     <div className='card' key={dataSource.name}>
       <div className='card-container'>
@@ -20,7 +31,7 @@ const Card = (props) => {
             >
               {dataSource.name}
               <span 
-                className='text-xs text-red-400'
+                className={markTextClass}
                 style={{marginLeft: '5px'}}
               >
                 {markText}
