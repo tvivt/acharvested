@@ -1,0 +1,74 @@
+@import '~antd/dist/antd.css';
+
+.app{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  transition: filter 0.3s linear;
+  user-select: none;
+  will-change: filter;
+  background-color: #fafafa;
+}
+
+
+@media screen and (min-width: 1112px) {
+  .app{
+    display: grid;
+    place-items: center;
+    grid-template-rows: 32px [content-start] auto [content-end] 50px;
+    grid-template-columns: 1fr [content-start] 1110px [content-end] 1fr;
+  } 
+}
+
+.app-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  grid-row: content-start / content-end;
+  overflow: auto;
+  grid-column: content-start / content-end;
+  border-radius: 12px;
+  background-color: #FFFFFF;
+}
+
+.app-nav{
+  color: white;
+  width: 256px;
+  height: 100%;
+  overflow: visible;
+  position: relative;
+  background-color: #001529;
+}
+
+.app-logo{
+  height: 120px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 30px;
+}
+
+.app-logo img{
+  width: 60px;
+  height: 60px;
+}
+
+.app-logo span{
+  font-size: 20px;
+}
+
+.app-menu{
+
+}
+
+.app-content{
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected{
+  background-color: none !important;
+}
