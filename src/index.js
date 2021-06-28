@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import store from './application/store';
 import './index.css';
 import App from './App';
-// import { metamaskUrl, isMobile } from './shared'
 // import reportWebVitals from './reportWebVitals';
 
 // if (typeof window.ethereum !== 'undefined' && !isMobile){

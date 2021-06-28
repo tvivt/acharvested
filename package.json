@@ -10,6 +10,7 @@
     "antd": "^4.16.5",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
+    "ethers": "^5.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.2",
@@ -21,9 +22,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "FAST_REFRESH=false craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "FAST_REFRESH=false react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -44,11 +45,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://airdrop.acharvested.me",
-  "devDependencies": {
-    "@craco/craco": "^6.1.2",
-    "autoprefixer": "^9",
-    "postcss": "^7",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
-  }
+  "proxy": "http://localhost:3000"
 }

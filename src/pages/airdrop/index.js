@@ -5,3 +5,5 @@ const Airdrop = () => {
     </div>
   )
 }
+
+export default Airdrop;

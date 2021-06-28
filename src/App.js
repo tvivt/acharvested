@@ -1,10 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Menu, Button } from 'antd';
+import { Menu } from 'antd';
 import {
-  MailOutlined,
-  DesktopOutlined,
   PieChartOutlined,
   ContainerOutlined,
   WalletOutlined,
@@ -59,7 +57,6 @@ function App(){
             <span>桑田</span>
           </div>
           <div className='app-menu'>
-            <div></div>
             <Menu
               defaultSelectedKeys={['1']}
               defaultOpenKeys={['sub1']}
@@ -75,10 +72,7 @@ function App(){
               <Menu.Item key="3" icon={<ContainerOutlined />}>
                 插件集合
               </Menu.Item>
-              <Menu.Item key="4" icon={<DollarOutlined />}>
-                立即订阅
-              </Menu.Item>
-              <Menu.Item key="5" icon={<SettingOutlined />}>
+              <Menu.Item key="4" icon={<SettingOutlined />}>
                 本地设置
               </Menu.Item>
             </Menu>         
@@ -86,7 +80,10 @@ function App(){
         </div>
         
         <div className='app-content'>
-          归档，学习，潜在
+          <div className='app-padding'>
+            归档，学习，潜在
+            <div className='app-line'></div>
+          </div>
           {/* <Route path='/' component={Archived} exact/>
           <Route path='/learn' component={Learn} />
           <Route path='/potential' component={Potential}/>
