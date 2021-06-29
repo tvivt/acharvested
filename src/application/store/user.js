@@ -13,7 +13,8 @@ const initialState = {
   address: '',
   usedType,
   nonce: '',
-  language: zh_CN
+  sign: '',
+  language: en_US
 }
 
 const userSlice = createSlice({
@@ -31,14 +32,18 @@ const userSlice = createSlice({
     },
     setLanguage(state, action){
       state.language = action.payload;
+    },
+    setSign(state, action){
+      state.sign = action.payload;
     }
   }
 });
 
-export const { setAddress, setNonce, setUsedType } = userSlice.actions;
+export const { setAddress, setNonce, setSign } = userSlice.actions;
 export const getAddress = (state) => state.user.address;
 export const getNonce = (state) => state.user.nonce;
 export const getUsedType = (state) => state.user.usedType;
 export const getLanguage = (state) => state.user.language;
+export const getSign = (state) => state.user.sign;
 
 export default userSlice;

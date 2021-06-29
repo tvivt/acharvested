@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  learn: [],
-  potential: [],
+  learns: [],
+  potentials: [],
   yuque: [],
   code: 99
 }
@@ -12,8 +12,8 @@ const premiumSlice = createSlice({
   initialState,
   reducers: {
     setPremiumDataSource(state, action){
-      state.learn = action.payload.learn;
-      state.potential = action.payload.potential;
+      state.learns = action.payload.learns;
+      state.potentials = action.payload.potentials;
       state.yuque = action.payload.yuque;
       state.code = action.payload.code
     }
@@ -21,8 +21,8 @@ const premiumSlice = createSlice({
 });
 
 export const { setPremiumDataSource } = premiumSlice.actions;
-export const getLearn = (state) => state.premium.learn;
-export const getPotential = (state) => state.premium.potential;
+export const getLearns = (state) => state.premium.learns;
+export const getPotentials = (state) => state.premium.potentials;
 export const getYuque = (state) => state.premium.yuque; 
 export const getCode = (state) => state.premium.code;
 

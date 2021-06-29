@@ -1,0 +1,31 @@
+.wallet{
+  width: 130px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #001529;
+  color: #001529;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 20px;
+}
+
+.wallet-display{
+  display: none;
+}
+
+.wallet-modal .ant-btn{
+  border: 1px solid #001529 !important;
+  color: #001529 !important;
+}
+
+.wallet-modal .ant-btn-primary{
+  background: #001529 !important;
+  border-color: #001529 !important;
+  
+}
+
+.wallet-modal .ant-btn-primary span{
+  color: #fff !important;
+}

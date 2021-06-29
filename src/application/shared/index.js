@@ -1,55 +1,4 @@
-import axios from 'axios';
-
-// 1 未安装 metamask https://metamask.io/
-// 2 拒绝签名
-
 export const metamaskUrl = 'https://metamask.io/';
-
-export const createSign = (nonce, address) => {
-  return new Promise((resolve, reject) => {
-    if (typeof window.ethereum !== 'undefined'){
-      const msg = `0x${Buffer.from(nonce, 'utf8').toString('hex')}`;
-      window.ethereum.request({
-        method: 'personal_sign',
-        params: [msg, address]
-      }).then((s) => {
-        resolve(s);
-      }).catch(() => {
-        reject(2);
-      });
-    } else {
-      reject(1)
-    }
-  });
-}
-
-const baseHost = process.env.NODE_ENV === 'development' ? '' : 'https://airdrop.acharvested.me';
-
-export const fetchTotalByServerless = () => {
-  const url = `${baseHost}/api/total`;
-  return axios({
-    url
-  });
-}
-
-export const fetchNonceByServerless = () => {
-  const url = `${baseHost}/api/nonce`;
-  return axios({
-    url
-  });
-}
-
-export const fetchVerifyResultByServerless = (nonce, sign, address) => {
-  const url = `${baseHost}/api/verify`;
-  return axios({
-    url,
-    params: {
-      nonce,
-      sign,
-      address
-    }
-  });
-}
 
 function fill(number, length) {
   const filler = '00000';
@@ -62,13 +11,9 @@ function fill(number, length) {
   return str;
 }
 
-
 export function createUnique() {
   const now = new Date();
-  const env = process.env.TARO_ENV;
   return (
-    env +
-    '-' +
     now.getFullYear() +
     fill(now.getMonth() + 1, 2) +
     fill(now.getDate(), 2) +
@@ -88,5 +33,61 @@ export const donateEtherscan = 'https://cn.etherscan.com/address/0x1A56d61142AC1
 
 export const truncated = (f) => {
   if (!f) return '';
-  return f.substr(0,5) + '...' + f.substr(f.length - 5);
+  return f.substr(0,4) + '...' + f.substr(f.length - 4);
+}
+
+export const getEthers = () => {
+  return window.ethers;
+}
+
+export const setEthers = (ethers) => {
+  window.ethers = ethers;
+}
+
+export const getProvider = () => {
+  return window.provider;
+}
+
+export const setProvider = (provider) => {
+  window.provider = provider;
+}
+
+export const getWeb3Modal = () => {
+  return window.web3Modal;
+}
+
+export const setWeb3Modal = (web3Modal) => {
+  window.web3Modal = web3Modal;
+}
+
+export const logoutOfWeb3Modal = async () => {
+  const provider = getProvider();
+  const web3Modal = getWeb3Modal();
+  if (provider && web3Modal){
+    if (provider.close){
+      await provider.close();
+    }
+    await web3Modal.clearCachedProvider();
+    setTimeout(() => {
+      window.location.reload();
+    }, 1);
+  }
+};
+
+export const createSign = (nonce, address) => {
+  return new Promise((resolve, reject) => {
+    if (typeof window.ethereum !== 'undefined'){
+      const msg = `0x${Buffer.from(nonce, 'utf8').toString('hex')}`;
+      window.ethereum.request({
+        method: 'personal_sign',
+        params: [msg, address]
+      }).then((s) => {
+        resolve(s);
+      }).catch(() => {
+        reject(2);
+      });
+    } else {
+      reject(1)
+    }
+  });
 }

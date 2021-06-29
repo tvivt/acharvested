@@ -1,0 +1,82 @@
+.airdrop{
+  width: 100%;
+  height: 100%;
+  color: #001529;
+  overflow: hidden;
+}
+.airdrop-line{
+  width: 100%;
+  border-width: 0px 0px thin;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.airdrop-line-padding{
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.airdrop-headers{
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.airdrop-padding{
+  padding: 32px 24px;
+}
+
+.airdrop-title{
+  font-size: 26px;
+}
+
+.airdrop-wallet{
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.airdrop-content{
+  padding-top: 5px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+.airdrop-content-padding{
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 32px;
+}
+
+.airdrop-content .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+  color: #001529 !important;
+}
+
+.airdrop-content .ant-tabs-tab-active::selection{
+  background: #001529 !important;
+}
+
+.airdrop-content .ant-tabs-tab:hover{
+  color: #001529 !important;
+}
+
+.airdrop-content .ant-tabs-ink-bar{
+  background: #001529 !important;
+}
+
+.airdrop-content .ant-tabs-nav::before {
+  border-bottom: none !important;
+}
+
+.airdrop-content .ant-btn{
+  border: 1px solid #001529 !important;
+  color: #001529 !important;
+}
+
+.airdrop-content .ant-btn-primary{
+  background: #001529 !important;
+  border-color: #001529 !important;
+}

@@ -6,19 +6,10 @@ import './index.css';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
 
-// if (typeof window.ethereum !== 'undefined' && !isMobile){
-
-// } else {
-  // alert(`it's used to desktop and go to ${metamaskUrl} install MetaMask`)
-// }
-
-
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
 
