@@ -1,11 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ConnectWalletStatus } from '../shared/status';
 
 export const zh_CN = 'zh_CN';
 export const en_US = 'en_US';
 
-// metamask
-// imtoken
-// wallectconnect
 // connectWalletStatus 三个状态
 // 0 未连接
 // 1 已初始化 provider
@@ -20,7 +18,7 @@ const initialState = {
   nonce: '',
   sign: '',
   language: en_US,
-  connectWalletStatus: 0
+  connectWalletStatus: ConnectWalletStatus.no
 }
 
 const userSlice = createSlice({

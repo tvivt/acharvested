@@ -153,7 +153,13 @@ const Buy = () => {
         <div className='buy-desc'>
           订阅价格：120 {symbolValue.toLocaleUpperCase()} / 年
           <span className='buy-container'>
-            <Select defaultValue={symbolValue} style={{ width: 120, marginRight: '10px' }} onChange={onChange}>
+            <Select 
+              defaultValue={symbolValue} 
+              style={{ width: 120, marginRight: '5px' }} 
+              onChange={onChange}
+              bordered={false}
+              dropdownClassName='buy-drop'
+            >
               <Option value="dai">DAI</Option>
               <Option value="usdt">USDT</Option>
             </Select>

@@ -5,7 +5,7 @@ import { getLearns, getPotentials } from '../../application/store/premium';
 import { getArchived, setArchived } from '../../application/store/archived';
 import { getAddress, getNonce, getSign } from '../../application/store/user';
 import { fetchArchived } from '../../application/shared/apis';
-import status from '../../application/shared/status';
+import { ResponseCode } from '../../application/shared/status';
 import Wallet from "../../application/components/Wallet/Wallet";
 import Archived from './Archived';
 import Learn from './Learn';
@@ -31,7 +31,7 @@ const Airdrop = () => {
     if (!firstLock.current && !sign){
       firstLock.current = true;
       fetchArchived(nonce, sign, address, 0).then(({data: archivedResponse}) => {
-        if (archivedResponse.code === status.ok){
+        if (archivedResponse.code === ResponseCode.ok){
           dispatch(setArchived(archivedResponse.data));
         }
       });
@@ -39,7 +39,7 @@ const Airdrop = () => {
 
     if (sign && archived.length === 9){
       fetchArchived(nonce, sign, address, 0).then(({data: archivedResponse}) => {
-        if (archivedResponse.code === status.ok){
+        if (archivedResponse.code === ResponseCode.ok){
           dispatch(setArchived(archivedResponse.data));
         }
       });

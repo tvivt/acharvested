@@ -15,10 +15,18 @@
   margin-right: 10px;
 }
 
+.buy-bef a{
+  font-size: 16px;
+}
+
 .buy-desc{
   margin-bottom: 10px;
 }
 
 .buy-container{
-  margin-left: 10px;
+  
+}
+
+.buy-drop{
+
 }

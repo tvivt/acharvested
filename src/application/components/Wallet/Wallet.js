@@ -25,7 +25,7 @@ import {
   logoutOfWeb3Modal
 } from '../../shared';
 import { fetchNonceByServerless, fetchVerifyResultByServerless } from '../../shared/apis';
-import status from '../../shared/status';
+import { ResponseCode, ConnectWalletStatus } from '../../shared/status';
 import './index.css';
 
 const Ethers = require('ethers');
@@ -52,6 +52,13 @@ const web3Modal = new Web3Modal({
   providerOptions
 });
 
+const UpdateWalletUI = {
+  load: 0,
+  connect: 1,
+  verify: 2,
+  success: 3
+}
+
 const Wallet = () => {
 
   const dispatch = useDispatch();
@@ -62,7 +69,7 @@ const Wallet = () => {
   const nonce = useSelector(getNonce);
   const sign = useSelector(getSign);
   const address = useSelector(getAddress);
-  const [connectStatus, setConnectStatus] = useState(0);
+  const [updateWalletUIStatus, setUpdateWalletUIStatus] = useState(UpdateWalletUI.load);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
@@ -75,7 +82,7 @@ const Wallet = () => {
       nonceLock.current = true;
       fetchNonceByServerless().then((response) => {
         const { code, data } = response.data;
-        if (code === status.ok ){
+        if (code === ResponseCode.ok ){
           dispatch(setNonce(data.nonce));
         }
       }).catch(() => {
@@ -86,7 +93,7 @@ const Wallet = () => {
     if (!sign && !addressLock.current){
       addressLock.current = true;
       setTimeout(() => {
-        setConnectStatus(1);
+        setUpdateWalletUIStatus(UpdateWalletUI.connect);
         if (!timer.current){
           timer.current = setInterval(() => {
             const web3Provider = getWeb3Provider();
@@ -103,40 +110,40 @@ const Wallet = () => {
     }
 
     if (sign){
-      setConnectStatus(3);
+      setUpdateWalletUIStatus(UpdateWalletUI.success);
     }
 
   }, [dispatch, nonce, sign, address]);
 
   const fetchAccountData = async () => {
-    setConnectStatus(0);
+    setUpdateWalletUIStatus(UpdateWalletUI.load);
     const provider = await web3Modal.connect();
     const web3Provider = new Ethers.providers.Web3Provider(provider);
     console.log()
     setProvider(provider);
     setWeb3Provider(web3Provider);
     setWeb3Modal(web3Modal);
-    setConnectStatus(2);
-    dispatch(setConnectWalletStatus(1))
+    setUpdateWalletUIStatus(UpdateWalletUI.verify);
+    dispatch(setConnectWalletStatus(ConnectWalletStatus.initProvider))
   }
 
   const connectWallet = async () => {
-    if (connectStatus === 1){
+    if (updateWalletUIStatus === 1){
       try {
         await fetchAccountData()
       } catch(e) {
         console.log("Could not get a wallet connection", e);
-        setConnectStatus(1);
+        setUpdateWalletUIStatus(UpdateWalletUI.connect);
         return;
       }
     }
 
-    if (connectStatus === 2 && !signLock.current){
+    if (updateWalletUIStatus === 2 && !signLock.current){
       signLock.current = true;
       createSign(nonce, address).then((sign) => {
         fetchVerifyResultByServerless(nonce, sign, address).then((response) => {
           const { code, data } = response.data;
-          if (code === status.ok || code === status.admin){
+          if (code === ResponseCode.ok || code === ResponseCode.admin){
             const premium = {
               learns: data.learns,
               potentials: data.potentials,
@@ -146,7 +153,7 @@ const Wallet = () => {
             dispatch(setPremiumDataSource(premium));
             dispatch(setConnectWalletStatus(2));
             dispatch(setSign(sign));
-            setConnectStatus(3);
+            setUpdateWalletUIStatus(UpdateWalletUI.success);
           } else {
             dispatch(setPremiumDataSource({
               learns: [],
@@ -163,7 +170,7 @@ const Wallet = () => {
       });
     }
 
-    if (connectStatus === 3){
+    if (updateWalletUIStatus === 3){
       setIsModalVisible(true);
     }
   }
@@ -179,20 +186,20 @@ const Wallet = () => {
   }
 
   const walletComp = useMemo(() => {
-    if (connectStatus === 0){
+    if (updateWalletUIStatus === 0){
       return <LoadingOutlined />
     }
-    if (connectStatus === 1){
+    if (updateWalletUIStatus === 1){
       return '连接钱包';
     }
-    if (connectStatus === 2){
+    if (updateWalletUIStatus === 2){
       return '验证钱包';
     }
-    if (connectStatus === 3){
+    if (updateWalletUIStatus === 3){
       return truncated(address);
     }
     return null
-  }, [connectStatus, address]);
+  }, [updateWalletUIStatus, address]);
 
   return (
     <div className='wallet' onClick={connectWallet}>

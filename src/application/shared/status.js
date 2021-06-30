@@ -1,4 +1,4 @@
-const code = {
+export const ResponseCode = {
   ok: 0,
   verifyError: 1,
   expired: 2,
@@ -6,4 +6,8 @@ const code = {
   admin: 10
 }
 
-export default code; 
+export const ConnectWalletStatus = {
+  no: 0,
+  initProvider: 1,
+  connected: 2
+}
