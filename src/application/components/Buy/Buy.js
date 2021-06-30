@@ -155,7 +155,6 @@ const Buy = () => {
           <span className='buy-container'>
             <Select defaultValue={symbolValue} style={{ width: 120, marginRight: '10px' }} onChange={onChange}>
               <Option value="dai">DAI</Option>
-              <Option value="usdc">USDC</Option>
               <Option value="usdt">USDT</Option>
             </Select>
           </span>
