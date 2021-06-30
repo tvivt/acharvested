@@ -83,7 +83,7 @@ const Wallet = () => {
       });
     }
 
-    if (typeof window.ethereum !== 'undefined' && !sign && !addressLock.current){
+    if (!sign && !addressLock.current){
       addressLock.current = true;
       setTimeout(() => {
         setConnectStatus(1);
