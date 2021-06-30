@@ -35,9 +35,6 @@ const MainMenu = () => {
           <Menu.Item key="3" icon={<span className='icon'><ContainerOutlined /></span>}>
             <Link to='/plugins'>插件集市</Link>
           </Menu.Item>
-          <Menu.Item key="4" icon={<span className='icon'><SettingOutlined /></span>}>
-            <Link to='/settings'>本地设置</Link>
-          </Menu.Item>
         </Menu> 
         <div className='left-menu-feedback'>
           <span className='feedback-icon'>
