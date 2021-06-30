@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { Button, Modal } from 'antd';
 import classnames from 'classnames';
 import { createUnique } from '../../application/shared';
+import Buy from '../../application/components/Buy/Buy';
 import './Potential.css';
 
 const zh_CN = 'zh_CN';
@@ -40,7 +41,7 @@ const Potential = (props) => {
   const renderContent = useMemo(() => {
     if (potentialStatus === 0){
       return (
-        <Button>购买订阅</Button>
+        <Buy />
       )
     }
 
@@ -72,6 +73,7 @@ const Potential = (props) => {
       )
     }
   }, [potentialStatus, dataSource]);
+
   return (
     <div className={potentialClass}>
       {renderContent}

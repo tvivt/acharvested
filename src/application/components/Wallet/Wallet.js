@@ -4,16 +4,23 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3Modal from "web3modal";
 import { Modal } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { getAddress, setAddress, getNonce, setNonce, setSign, getSign } from '../../store/user';
+import { 
+  getAddress, 
+  setAddress, 
+  getNonce, 
+  setNonce, 
+  setSign, 
+  getSign, 
+  setConnectWalletStatus
+} from '../../store/user';
 import { setPremiumDataSource } from '../../store/premium';
 import { INFURA_ID } from '../../../constants';
 import { 
   truncated,
   setWeb3Modal, 
   setProvider, 
-  createSign, 
-  getEthers, 
-  setEthers,
+  createSign,  
+  setWeb3Provider,
   logoutOfWeb3Modal
 } from '../../shared';
 import { fetchNonceByServerless, fetchVerifyResultByServerless } from '../../shared/apis';
@@ -49,7 +56,7 @@ const Wallet = () => {
   const dispatch = useDispatch();
   const timer = useRef(null);
   const nonceLock = useRef(false);
-  const ethersRef = useRef(getEthers());
+  const addressLock = useRef(false);
   const nonce = useSelector(getNonce);
   const sign = useSelector(getSign);
   const address = useSelector(getAddress);
@@ -74,14 +81,17 @@ const Wallet = () => {
       });
     }
 
-    if (typeof window.ethereum !== 'undefined' && !sign){
+    if (typeof window.ethereum !== 'undefined' && !sign && !addressLock.current){
+      addressLock.current = true;
       setTimeout(() => {
         setConnectStatus(1);
         if (!timer.current){
           timer.current = setInterval(() => {
             if (window.ethereum.selectedAddress){
               clearInterval(timer.current);
-              dispatch(setAddress(window.ethereum.selectedAddress));
+              if (!address){
+                dispatch(setAddress(window.ethereum.selectedAddress));
+              }
             }
           },200);
         }
@@ -92,17 +102,17 @@ const Wallet = () => {
       setConnectStatus(3);
     }
 
-  }, [dispatch, nonce, sign]);
+  }, [dispatch, nonce, sign, address]);
 
   const fetchAccountData = async () => {
     setConnectStatus(0);
     const provider = await web3Modal.connect();
-    const ethers = new Ethers.providers.Web3Provider(provider);
-    ethersRef.current = ethers;
-    setEthers(ethers);
+    const web3Provider = new Ethers.providers.Web3Provider(provider);
     setProvider(provider);
+    setWeb3Provider(web3Provider);
     setWeb3Modal(web3Modal);
     setConnectStatus(2);
+    dispatch(setConnectWalletStatus(1))
   }
 
   const connectWallet = async () => {
@@ -118,11 +128,9 @@ const Wallet = () => {
 
     if (connectStatus === 2){
       createSign(nonce, address).then((sign) => {
-        dispatch(setSign(sign));
         fetchVerifyResultByServerless(nonce, sign, address).then((response) => {
           const { code, data } = response.data;
           if (code === status.ok || code === status.admin){
-            console.log('data', data)
             const premium = {
               learns: data.learns,
               potentials: data.potentials,
@@ -130,6 +138,8 @@ const Wallet = () => {
               code
             }
             dispatch(setPremiumDataSource(premium));
+            dispatch(setConnectWalletStatus(2));
+            dispatch(setSign(sign));
             setConnectStatus(3);
           } else {
             dispatch(setPremiumDataSource({
@@ -138,6 +148,8 @@ const Wallet = () => {
               yuque: [],
               code: 1
             }));
+            alert('无法验证，原因是您不在许可名单内 !');
+            return;
           }
         });
       }).catch(() => {
@@ -157,6 +169,7 @@ const Wallet = () => {
 
   const onOK = async () => {
     await logoutOfWeb3Modal();
+    dispatch(setConnectWalletStatus(0));
   }
 
   const walletComp = useMemo(() => {

@@ -36,12 +36,12 @@ export const truncated = (f) => {
   return f.substr(0,4) + '...' + f.substr(f.length - 4);
 }
 
-export const getEthers = () => {
-  return window.ethers;
+export const getWeb3Provider = () => {
+  return window.web3Provider;
 }
 
-export const setEthers = (ethers) => {
-  window.ethers = ethers;
+export const setWeb3Provider = (web3Provider) => {
+  window.web3Provider = web3Provider;
 }
 
 export const getProvider = () => {

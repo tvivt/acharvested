@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Button } from 'antd';
 import classnames from 'classnames';
+import Buy from '../../application/components/Buy/Buy';
 import { createUnique } from '../../application/shared';
 import './Learn.css';
 
@@ -24,7 +24,7 @@ const Learn = (props) => {
   const renderContent = useMemo(() => {
     if (learnStatus === 0){
       return (
-        <Button>购买订阅</Button>
+        <Buy />
       )
     }
     if (learnStatus === 1){

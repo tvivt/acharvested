@@ -8,6 +8,7 @@
   user-select: none;
   will-change: filter;
   background-color: #fafafa;
+  color: #001529;
 }
 
 
@@ -44,3 +45,21 @@
   border-color: rgba(0, 0, 0, 0.12);
 }
 
+.app-footer{
+  grid-row: content-end / span 1;
+  grid-column: content-start / content-end;
+  color: #001529;
+}
+
+.app-footer a{
+  color: #001529;
+}
+
+.app-footer a:hover{
+  color: #001529;
+}
+
+.app-footer-divide{
+  margin-left: 6px;
+  margin-right: 6px;
+}

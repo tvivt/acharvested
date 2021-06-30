@@ -1,0 +1,24 @@
+.we-close .ant-btn{
+  border: 1px solid #001529 !important;
+  color: #001529 !important;
+}
+
+.we-close{
+  font-size: 14px;
+}
+
+.buy-bef{
+  margin-bottom: 10px;
+}
+
+.buy-bef span{
+  margin-right: 10px;
+}
+
+.buy-desc{
+  margin-bottom: 10px;
+}
+
+.buy-container{
+  margin-left: 10px;
+}

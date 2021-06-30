@@ -86,7 +86,7 @@ const Airdrop = () => {
               {renderPotential}
             </TabPane>
             <TabPane tab="小额" key="4">
-              Content of Tab Pane 4
+              即将到来
             </TabPane>
           </Tabs>
         </div>

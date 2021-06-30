@@ -5,8 +5,20 @@
   overflow: visible;
   position: relative;
   background-color: #001529;
+  display: grid;
+  grid-template-rows: 0fr auto 0fr;
 }
 
+.left-menu-content{
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.main-menu .icon span{
+  font-size: 20px !important;
+}
 .left-menu-logo{
   height: 100px;
   display: flex;
@@ -26,6 +38,27 @@
   font-size: 20px;
 }
 
+.left-menu-feedback{
+  padding-left: 20px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.feedback-icon{
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.left-menu-feedback a{
+  color: #fff;
+}
+
+.left-menu-feedback a:hover{
+  color: #fff;
+}
 
 .ant-menu-item-selected{
   background: none !important;

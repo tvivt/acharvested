@@ -4,13 +4,15 @@ import premiumSlice from './premium';
 import userSlice from './user';
 import totalSlice from './total';
 import archivedSlice from './archived';
+import tokenlistSlice from './tokenlist';
 
 const store = configureStore({
   reducer: {
     user: userSlice.reducer,
     premium: premiumSlice.reducer,
     archived: archivedSlice.reducer,
-    total: totalSlice.reducer
+    total: totalSlice.reducer,
+    tokenlist: tokenlistSlice.reducer
   },
   middleware: (getDefaultMiddleware) => {
     return process.env.NODE_ENV === 'development' 
