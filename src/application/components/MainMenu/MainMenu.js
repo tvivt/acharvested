@@ -3,7 +3,6 @@ import { Menu } from 'antd';
 import {
   PieChartOutlined,
   ContainerOutlined,
-  SettingOutlined,
   BankOutlined,
   QuestionCircleOutlined
 } from '@ant-design/icons';
