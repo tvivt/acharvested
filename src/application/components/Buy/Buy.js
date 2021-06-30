@@ -12,7 +12,7 @@ import './Buy.css';
 
 const { Option } = Select;
 const buyAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
-const buyPrice = ethers.utils.parseEther("1").toBigInt();
+const buyPrice = ethers.utils.parseEther("120").toBigInt();
 
 const Buy = () => {
 
