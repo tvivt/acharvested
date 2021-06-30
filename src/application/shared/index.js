@@ -76,15 +76,18 @@ export const logoutOfWeb3Modal = async () => {
 
 export const createSign = (nonce, address) => {
   return new Promise((resolve, reject) => {
-    if (typeof window.ethereum !== 'undefined'){
+    const web3Provider = getWeb3Provider();
+    if (web3Provider){
       const msg = `0x${Buffer.from(nonce, 'utf8').toString('hex')}`;
-      window.ethereum.request({
+      web3Provider.provider.sendAsync({
         method: 'personal_sign',
         params: [msg, address]
-      }).then((s) => {
-        resolve(s);
-      }).catch(() => {
-        reject(2);
+      }, (err, d) => {
+        if (err){
+          reject(2);
+          return;
+        }
+        resolve(d.result);
       });
     } else {
       reject(1)

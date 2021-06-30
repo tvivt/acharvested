@@ -37,7 +37,7 @@ const Airdrop = () => {
       });
     }
 
-    if (sign && archived.length === 5){
+    if (sign && archived.length === 9){
       fetchArchived(nonce, sign, address, 0).then(({data: archivedResponse}) => {
         if (archivedResponse.code === status.ok){
           dispatch(setArchived(archivedResponse.data));

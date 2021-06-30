@@ -21,6 +21,7 @@ import {
   setProvider, 
   createSign,  
   setWeb3Provider,
+  getWeb3Provider,
   logoutOfWeb3Modal
 } from '../../shared';
 import { fetchNonceByServerless, fetchVerifyResultByServerless } from '../../shared/apis';
@@ -57,6 +58,7 @@ const Wallet = () => {
   const timer = useRef(null);
   const nonceLock = useRef(false);
   const addressLock = useRef(false);
+  const signLock = useRef(false);
   const nonce = useSelector(getNonce);
   const sign = useSelector(getSign);
   const address = useSelector(getAddress);
@@ -87,10 +89,12 @@ const Wallet = () => {
         setConnectStatus(1);
         if (!timer.current){
           timer.current = setInterval(() => {
-            if (window.ethereum.selectedAddress){
-              clearInterval(timer.current);
-              if (!address){
-                dispatch(setAddress(window.ethereum.selectedAddress));
+            const web3Provider = getWeb3Provider();
+            if (web3Provider){
+              let address = web3Provider.provider.selectedAddress || web3Provider.provider.accounts[0];
+              if (address){
+                clearInterval(timer.current);
+                dispatch(setAddress(address));
               }
             }
           },200);
@@ -108,6 +112,7 @@ const Wallet = () => {
     setConnectStatus(0);
     const provider = await web3Modal.connect();
     const web3Provider = new Ethers.providers.Web3Provider(provider);
+    console.log()
     setProvider(provider);
     setWeb3Provider(web3Provider);
     setWeb3Modal(web3Modal);
@@ -126,7 +131,8 @@ const Wallet = () => {
       }
     }
 
-    if (connectStatus === 2){
+    if (connectStatus === 2 && !signLock.current){
+      signLock.current = true;
       createSign(nonce, address).then((sign) => {
         fetchVerifyResultByServerless(nonce, sign, address).then((response) => {
           const { code, data } = response.data;

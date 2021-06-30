@@ -73,7 +73,7 @@ const Buy = () => {
         }).catch((e) => {
           setErrorMessage(e.message);
           setCountStatus(3);
-          setTxText('')
+          setTxText('');
         });
       }
       if (symbolValue === 'usdt'){
@@ -84,7 +84,7 @@ const Buy = () => {
         }).catch((e) => {
           setErrorMessage(e.message);
           setCountStatus(3);
-          setTxText('')
+          setTxText('');
         });
       }
     }
