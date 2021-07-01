@@ -48,5 +48,10 @@
       "last 1 safari version"
     ]
   },
+  "author": {
+    "name": "icepy",
+    "email": "foricepy@gmail.com"
+  },
+  "license": "AGPL-3.0",
   "proxy": "http://localhost:3000"
 }

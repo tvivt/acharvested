@@ -5,13 +5,15 @@ import axios from 'axios';
 import { fetchTotalByServerless } from './application/shared/apis';
 import { setAllTotal, getAccountTotal, getPriceTotal } from './application/store/total';
 import { setTokenlist } from './application/store/tokenlist';
+import { ResponseCode } from './application/shared/status';
 import MainMenu from './application/components/MainMenu/MainMenu';
 import Airdrop from './pages/airdrop';
 import Automatic from './pages/automatic';
 import Plugins from './pages/plugins';
+import pkg from '../package.json';
 import './App.css';
 
-const version = 'v1.1.0';
+const version = `v${pkg.version}`;
 
 function App(){
 
@@ -24,8 +26,8 @@ function App(){
     if (lock.current){
       lock.current = false;
       fetchTotalByServerless().then((response) => {
-        const { code: remoteCode, data } = response.data;
-        if (remoteCode === 0){
+        const { code, data } = response.data;
+        if (code === ResponseCode.ok){
           dispatch(setAllTotal({
             accountTotal: data.account_total,
             learnTotal: data.learn_total,
