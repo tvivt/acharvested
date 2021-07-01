@@ -1,13 +1,16 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import classnames from 'classnames';
 import Buy from '../../application/components/Buy/Buy';
 import { createUnique } from '../../application/shared';
+import { getLearnTotal } from '../../application/store/total';
 import './Learn.css';
 
 const zh_CN = 'zh_CN';
 
 const Learn = (props) => {
   const { dataSource } = props;
+  const learnTotal = useSelector(getLearnTotal);
   const [ learnStatus, setLearnStatus ] = useState(0);
 
   const learnClass = classnames({
@@ -24,7 +27,7 @@ const Learn = (props) => {
   const renderContent = useMemo(() => {
     if (learnStatus === 0){
       return (
-        <Buy />
+        <Buy text={`操作策略（${learnTotal}）`}/>
       )
     }
     if (learnStatus === 1){
@@ -65,7 +68,7 @@ const Learn = (props) => {
         </div>
       );
     }
-  }, [learnStatus, dataSource]);
+  }, [learnStatus, dataSource, learnTotal]);
   
   return (
     <div className={learnClass}>

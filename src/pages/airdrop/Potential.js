@@ -1,7 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { Button, Modal } from 'antd';
 import classnames from 'classnames';
 import { createUnique } from '../../application/shared';
+import { getPotentialTotal } from '../../application/store/total';
 import Buy from '../../application/components/Buy/Buy';
 import './Potential.css';
 
@@ -9,6 +11,7 @@ const zh_CN = 'zh_CN';
 
 const Potential = (props) => {
   const { dataSource } = props;
+  const potentialTotal = useSelector(getPotentialTotal);
   const [ potentialStatus, setPotentialStatus ] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalData, setModalData] = useState(null);
@@ -41,7 +44,7 @@ const Potential = (props) => {
   const renderContent = useMemo(() => {
     if (potentialStatus === 0){
       return (
-        <Buy />
+        <Buy text={`潜在空投（${potentialTotal}）`}/>
       )
     }
 
@@ -72,7 +75,7 @@ const Potential = (props) => {
         </div>
       )
     }
-  }, [potentialStatus, dataSource]);
+  }, [potentialStatus, dataSource, potentialTotal]);
 
   return (
     <div className={potentialClass}>

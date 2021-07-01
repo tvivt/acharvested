@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import { fetchTotalByServerless } from './application/shared/apis';
-import { setAllTotal } from './application/store/total';
+import { setAllTotal, getAccountTotal, getPriceTotal } from './application/store/total';
 import { setTokenlist } from './application/store/tokenlist';
 import MainMenu from './application/components/MainMenu/MainMenu';
 import Airdrop from './pages/airdrop';
@@ -17,6 +17,8 @@ function App(){
 
   const dispatch = useDispatch();
   const lock = useRef(true);
+  const accountTotal = useSelector(getAccountTotal);
+  const priceTotal = useSelector(getPriceTotal);
 
   useEffect(() => {
     if (lock.current){
@@ -85,6 +87,10 @@ function App(){
           </a>
           <span className='app-footer-divide'>-</span>
           <span>版本{version}</span>
+          <span className='app-footer-divide'>-</span>
+          <span>订阅用户({accountTotal})</span>
+          <span className='app-footer-divide'>-</span>
+          <span>空投价值(${parseInt(priceTotal)})</span>
         </div>
       </Router>
     </div>

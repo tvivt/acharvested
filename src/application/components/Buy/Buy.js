@@ -14,8 +14,9 @@ const { Option } = Select;
 const buyAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
 const buyPrice = ethers.utils.parseEther("120").toBigInt();
 
-const Buy = () => {
+const Buy = (props) => {
 
+  const { text } = props;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [countStatus, setCountStatus] = useState(0);
   const [symbolValue, setSymbolValue] = useState('dai');
@@ -128,7 +129,8 @@ const Buy = () => {
 
   return (
     <div className='we-buy'>
-      <Button onClick={openModal}>购买订阅</Button>
+      <span className='we-buy-text'>{text}</span>
+      <Button onClick={openModal}>订阅解锁</Button>
       <Modal
         className='we-close'
         centered
