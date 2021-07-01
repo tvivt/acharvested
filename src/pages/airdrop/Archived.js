@@ -3,6 +3,7 @@ import { Modal, Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { getLanguage } from '../../application/store/user';
 import { createUnique } from '../../application/shared';
+import Loading from '../../application/components/Loading/Loading';
 import './Archived.css';
 
 const Archived = (props) => {
@@ -13,6 +14,14 @@ const Archived = (props) => {
 
   const onCancel = () => {
     setIsModalVisible(false);
+  }
+
+  if (dataSource.length === 0){
+    return (
+      <div className='archived-loading'>
+        <Loading />
+      </div>
+    )
   }
 
   return (
