@@ -85,10 +85,8 @@ function App(){
             target='_blank'
             rel="noreferrer"
           >
-            源代码
+            源代码({version})
           </a>
-          <span className='app-footer-divide'>-</span>
-          <span>版本{version}</span>
           <span className='app-footer-divide'>-</span>
           <span>订阅用户({accountTotal})</span>
           <span className='app-footer-divide'>-</span>

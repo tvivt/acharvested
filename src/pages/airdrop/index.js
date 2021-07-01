@@ -66,7 +66,7 @@ const Airdrop = () => {
     <div className='airdrop'>
       <div className='airdrop-padding'>
         <div className='airdrop-headers'>
-          <div className='airdrop-title'>数据分析工具</div>
+          <div className='airdrop-title'>空投数据分析</div>
           <div className='airdrop-wallet'><Wallet /></div>
         </div>
       </div>
