@@ -77,6 +77,54 @@ const Potential = (props) => {
     }
   }, [potentialStatus, dataSource, potentialTotal]);
 
+  const renderModalContent = useMemo(() => {
+    if (!modalData) {
+      return null;
+    }
+    const { description, guess } = modalData;
+    const descContent = description[zh_CN];
+    const guessContent = guess[zh_CN];
+    const renderGuess = () => {
+      if (Array.isArray(guessContent) && guessContent.length > 0){
+        return (
+          <>
+            <div className='p-m-guess'>空投猜测</div>
+            <div className='p-m-guess-content'>
+              {
+                guessContent.map((v, i) => {
+                  return (
+                    <div key={createUnique()}>
+                      <span style={{marginRight: '5px'}}>{i+1}. </span>
+                      <span>{v}</span>
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </>
+        )
+      }
+      return null;
+    }
+    const renderDesc = () => {
+      if (Array.isArray(descContent) && descContent.length > 0){
+        return (
+          <>
+            <div className='p-m-title'>项目介绍</div>
+            <div className='p-m-content'>{modalData.name} - {descContent[0]}</div>
+          </>
+        )
+      }
+      return null;
+    }
+    return (
+      <div className='potentail-modal-content'>
+        {renderDesc()}
+        {renderGuess()}
+      </div>
+    )
+  }, [modalData])
+
   return (
     <div className={potentialClass}>
       {renderContent}
@@ -97,13 +145,7 @@ const Potential = (props) => {
           </Button>
         ]}
       >
-        {
-          modalData ? (
-            <div>
-              {modalData.description[zh_CN][0]}
-            </div>
-          ) : ''
-        }
+        {renderModalContent}
       </Modal>
     </div>
   );

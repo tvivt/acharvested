@@ -13,7 +13,9 @@ const premiumSlice = createSlice({
   reducers: {
     setPremiumDataSource(state, action){
       state.learns = action.payload.learns;
-      state.potentials = action.payload.potentials;
+      const pre = action.payload.potentials.filter((v) => v.mark === 1);
+      const last = action.payload.potentials.filter((v) => v.mark === 0);
+      state.potentials = [...pre, ...last];
       state.yuque = action.payload.yuque;
       state.code = action.payload.code
     }
