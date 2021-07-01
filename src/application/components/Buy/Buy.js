@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Modal, Button, Select } from 'antd';
+import { Modal, Button } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { createUnique, getWeb3Provider } from '../../shared';
@@ -7,10 +7,10 @@ import { getConnectWalletStatus } from '../../store/user';
 import { getSupport } from '../../store/tokenlist';
 import { ethers } from 'ethers';
 import DAIABI from '../../ABI/DAI.json';
-import USDTABI from '../../ABI/USDT.json';
+// import USDTABI from '../../ABI/USDT.json';
 import './Buy.css';
 
-const { Option } = Select;
+// const { Option } = Select;
 const buyAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
 const buyPrice = ethers.utils.parseEther("120").toBigInt();
 
@@ -19,13 +19,13 @@ const Buy = (props) => {
   const { text } = props;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [countStatus, setCountStatus] = useState(0);
-  const [symbolValue, setSymbolValue] = useState('dai');
+  const [symbolValue ] = useState('dai');
   const [errorMessage, setErrorMessage] = useState('');
   const [txText, setTxText] = useState('')
   const support = useSelector(getSupport);
   const connectWalletStatus = useSelector(getConnectWalletStatus);
   const daiContract = useRef(null);
-  const usdtContract = useRef(null);
+  // const usdtContract = useRef(null);
 
   useEffect(() => {
     if (!daiContract.current && support.length > 0 && connectWalletStatus === 1){
@@ -38,7 +38,7 @@ const Buy = (props) => {
           daiContract.current = new ethers.Contract(address, DAIABI.dai, web3Provider.getSigner());
         }
         if (symbolText === 'usdt'){
-          usdtContract.current = new ethers.Contract(address, USDTABI.usdt, web3Provider.getSigner());
+          // usdtContract.current = new ethers.Contract(address, USDTABI.usdt, web3Provider.getSigner());
         }
       });
     }
@@ -59,9 +59,9 @@ const Buy = (props) => {
     setTxText('')
   }
 
-  const onChange = (value) => {
-    setSymbolValue(value);
-  }
+  // const onChange = (value) => {
+  //   setSymbolValue(value);
+  // }
 
   const onOk = async() => {
     if (countStatus === 0 || countStatus === 3){
@@ -77,17 +77,17 @@ const Buy = (props) => {
           setTxText('');
         });
       }
-      if (symbolValue === 'usdt'){
-        usdtContract.current.transfer(buyAddress, buyPrice).then((response) => {
-          const { hash } = response;
-          setCountStatus(2);
-          setTxText(hash);
-        }).catch((e) => {
-          setErrorMessage(e.message);
-          setCountStatus(3);
-          setTxText('');
-        });
-      }
+      // if (symbolValue === 'usdt'){
+      //   usdtContract.current.transfer(buyAddress, buyPrice).then((response) => {
+      //     const { hash } = response;
+      //     setCountStatus(2);
+      //     setTxText(hash);
+      //   }).catch((e) => {
+      //     setErrorMessage(e.message);
+      //     setCountStatus(3);
+      //     setTxText('');
+      //   });
+      // }
     }
   }
 
@@ -140,7 +140,8 @@ const Buy = (props) => {
         footer={footerButtons}
       >
         <div className='buy-bef'>
-          重点阅读：
+          同意协议：
+          <span>阅读</span>
           <span>
             <a 
               href='https://github.com/icepy/acharvested/issues/2#issuecomment-871366013'
@@ -150,11 +151,21 @@ const Buy = (props) => {
               声明
             </a>
           </span>
+          <span>或</span>
+          <span>
+            <a 
+              href='https://github.com/icepy/acharvested/issues/2#issuecomment-871366465'
+              target='_blank'
+              rel="noreferrer"
+            >
+              手动支付
+            </a>
+          </span>
           <span>若支付请勿关闭此窗口</span>
         </div>
         <div className='buy-desc'>
           订阅价格：120 {symbolValue.toLocaleUpperCase()} / 年
-          <span className='buy-container'>
+          {/* <span className='buy-container'>
             <Select 
               defaultValue={symbolValue} 
               style={{ width: 120, marginRight: '5px' }} 
@@ -163,9 +174,8 @@ const Buy = (props) => {
               dropdownClassName='buy-drop'
             >
               <Option value="dai">DAI</Option>
-              <Option value="usdt">USDT</Option>
             </Select>
-          </span>
+          </span> */}
         </div>
         <div className='buy-status'>
           支付状态：{buying} 

@@ -42,7 +42,7 @@ function App(){
       }).then((response) => {
         const tokenlist = response.data;
         const tokens = response.data.tokens;
-        const buyTokens = ['dai','usdt'];
+        const buyTokens = ['dai'];
         const saved = [];
         tokens.forEach((v) => {
           const symbolKey =  v.symbol.toLocaleLowerCase();
