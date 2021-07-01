@@ -2,6 +2,10 @@
 
 ## acharvested
 
+![](https://img.shields.io/github/license/icepy/acharvested)
+![](https://img.shields.io/github/package-json/v/icepy/acharvested/main)
+![](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Ficepy%2Facharvested)
+
 中文意为 “桑田”，于 2021/06/12 宣布推出，喻为春种秋收之意。
 
 在以太坊网络中，尤其是 DeFi NFT 的蓬勃发展，为早期加密用户以空投的形式发放了数百万美元。 我认为随着区块链行业的发展，在这历史进程中，未来还有很多不错的早期“福利”。而桑田的第一个功能就是收集和存储了大量的空投数据，并对数据进行加工提炼，研究当前与过去的空投规则，进行对比对和打分，在清洗数据的过程中，也会寻找一些有趣的项目。
