@@ -9,7 +9,7 @@ import './Learn.css';
 const zh_CN = 'zh_CN';
 
 const Learn = (props) => {
-  const { dataSource } = props;
+  const { dataSource, airdropHeight } = props;
   const learnTotal = useSelector(getLearnTotal);
   const [ learnStatus, setLearnStatus ] = useState(0);
 
@@ -24,6 +24,8 @@ const Learn = (props) => {
     }
   }, [dataSource]);
 
+  const contentHeight = airdropHeight - 200;
+
   const renderContent = useMemo(() => {
     if (learnStatus === 0){
       return (
@@ -32,7 +34,7 @@ const Learn = (props) => {
     }
     if (learnStatus === 1){
       return (
-        <div className='learn-content'>
+        <div className='learn-content' style={{height: `${contentHeight}px`}}>
           {
             dataSource.map((v) => {
               return (
@@ -68,7 +70,7 @@ const Learn = (props) => {
         </div>
       );
     }
-  }, [learnStatus, dataSource, learnTotal]);
+  }, [learnStatus, dataSource, learnTotal, contentHeight]);
   
   return (
     <div className={learnClass}>

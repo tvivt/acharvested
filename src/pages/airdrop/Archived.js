@@ -7,7 +7,7 @@ import Loading from '../../application/components/Loading/Loading';
 import './Archived.css';
 
 const Archived = (props) => {
-  const { dataSource } = props;
+  const { dataSource, airdropHeight } = props;
   const language = useSelector(getLanguage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalData, setModalData] = useState(null);
@@ -24,9 +24,11 @@ const Archived = (props) => {
     )
   }
 
+  const contentHeight = airdropHeight - 200;
+
   return (
     <div className='archived'>
-      <div className='archived-content'>
+      <div className='archived-content' style={{height: `${contentHeight}px`}}>
         {
           dataSource.map((v) => {
             return (

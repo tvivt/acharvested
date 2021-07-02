@@ -10,7 +10,7 @@ import './Potential.css';
 const zh_CN = 'zh_CN';
 
 const Potential = (props) => {
-  const { dataSource } = props;
+  const { dataSource, airdropHeight } = props;
   const potentialTotal = useSelector(getPotentialTotal);
   const [ potentialStatus, setPotentialStatus ] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -41,6 +41,8 @@ const Potential = (props) => {
     return '';
   }
 
+  const contentHeight = airdropHeight - 200;
+
   const renderContent = useMemo(() => {
     if (potentialStatus === 0){
       return (
@@ -50,7 +52,7 @@ const Potential = (props) => {
 
     if (potentialStatus === 1){
       return (
-        <div className='potential-content'>
+        <div className='potential-content' style={{height: `${contentHeight}px`}}>
           {
             dataSource.map((v) => {
               return (
@@ -75,7 +77,7 @@ const Potential = (props) => {
         </div>
       )
     }
-  }, [potentialStatus, dataSource, potentialTotal]);
+  }, [potentialStatus, dataSource, potentialTotal, contentHeight]);
 
   const renderModalContent = useMemo(() => {
     if (!modalData) {

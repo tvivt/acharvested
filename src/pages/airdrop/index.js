@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Tabs } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
+import { debounce } from 'lodash';
 import { getLearns, getPotentials } from '../../application/store/premium';
 import { getArchived, setArchived } from '../../application/store/archived';
 import { getAddress, getNonce, getSign } from '../../application/store/user';
@@ -25,6 +26,9 @@ const Airdrop = () => {
   const archived = useSelector(getArchived);
   const [ tabActiveKey, setTabActiveKey ] = useState("1");
   const firstLock = useRef(false);
+  const airdropDOM = useRef(null);
+  const [airdropHeight, setAirdropHeight] = useState(0);
+  const resetLock = useRef(false);
 
   useEffect(() => {
 
@@ -44,26 +48,35 @@ const Airdrop = () => {
         }
       });
     }
-  }, [dispatch, nonce, sign, address, archived]);
+
+    if (!resetLock.current){
+      resetLock.current = true;
+      setAirdropHeight(airdropDOM.current.clientHeight);
+      window.addEventListener('resize', debounce(() => {
+        setAirdropHeight(airdropDOM.current.clientHeight);
+      }, 500));
+    }
+    
+  }, [dispatch, nonce, sign, address, archived, airdropHeight]);
 
   const tabOnChange = (key) => {
     setTabActiveKey(key);
   }
 
   const renderArchived = useMemo(() => {
-    return <Archived dataSource={archived}/>;
-  }, [archived])
+    return <Archived dataSource={archived} airdropHeight={airdropHeight}/>;
+  }, [archived, airdropHeight])
 
   const renderLearn = useMemo(() => {
-    return <Learn dataSource={learns} />;
-  }, [learns]);
+    return <Learn dataSource={learns} airdropHeight={airdropHeight} />;
+  }, [learns, airdropHeight]);
 
   const renderPotential = useMemo(() => {
-    return <Potential dataSource={potentials} />
-  }, [potentials]);
+    return <Potential dataSource={potentials} airdropHeight={airdropHeight} />
+  }, [potentials, airdropHeight]);
 
   return (
-    <div className='airdrop'>
+    <div className='airdrop' ref={airdropDOM}>
       <div className='airdrop-padding'>
         <div className='airdrop-headers'>
           <div className='airdrop-title'>空投数据分析</div>
