@@ -1,6 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '.'
 
-const initialState = {
+interface TokenListStore{
+  name: string;
+  timestamp: string;
+  version: any;
+  keywords: any[];
+  tokens: any[];
+  logoURI: string;
+  support: any[];
+}
+
+const initialState: TokenListStore = {
   name: '',
   timestamp: '',
   version: {},
@@ -28,7 +39,7 @@ const tokenlistSlice = createSlice({
 });
 
 export const { setTokenlist } = tokenlistSlice.actions;
-export const getTokens = (state) => state.tokenlist.tokens;
-export const getSupport = (state) => state.tokenlist.support;
+export const getTokens = (state: RootState) => state.tokenlist.tokens;
+export const getSupport = (state: RootState) => state.tokenlist.support;
 
 export default tokenlistSlice;

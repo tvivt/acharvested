@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '.';
+import { ArchivedEntity } from '../shared/apis';
 
-const initialState = {
+interface ArchivedStore {
+  data: ArchivedEntity[];
+}
+
+const initialState: ArchivedStore = {
   data: []
 }
 
@@ -15,6 +21,6 @@ const archivedSlice = createSlice({
 });
 
 export const { setArchived } = archivedSlice.actions;
-export const getArchived = (state) => state.archived.data;
+export const getArchived = (state: RootState) => state.archived.data;
 
 export default archivedSlice;

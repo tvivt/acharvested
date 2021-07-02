@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '.';
 import { ConnectWalletStatus } from '../shared/status';
 
 export const zh_CN = 'zh_CN';
@@ -9,10 +10,18 @@ export const en_US = 'en_US';
 // 1 已初始化 provider
 // 2 已验证钱包
 
-
 const usedType = !!window.imToken ? 'imtoken' : 'metamask';
 
-const initialState = {
+interface UserStore{
+  address: string;
+  usedType: string;
+  nonce: string;
+  sign: string;
+  language: string;
+  connectWalletStatus: ConnectWalletStatus
+}
+
+const initialState: UserStore = {
   address: '',
   usedType,
   nonce: '',
@@ -47,11 +56,11 @@ const userSlice = createSlice({
 });
 
 export const { setAddress, setNonce, setSign, setConnectWalletStatus } = userSlice.actions;
-export const getAddress = (state) => state.user.address;
-export const getNonce = (state) => state.user.nonce;
-export const getUsedType = (state) => state.user.usedType;
-export const getLanguage = (state) => state.user.language;
-export const getSign = (state) => state.user.sign;
-export const getConnectWalletStatus = (state) => state.user.connectWalletStatus;
+export const getAddress = (state: RootState) => state.user.address;
+export const getNonce = (state: RootState) => state.user.nonce;
+export const getUsedType = (state: RootState) => state.user.usedType;
+export const getLanguage = (state: RootState) => state.user.language;
+export const getSign = (state: RootState) => state.user.sign;
+export const getConnectWalletStatus = (state: RootState) => state.user.connectWalletStatus;
 
 export default userSlice;

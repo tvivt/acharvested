@@ -1,4 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { 
+  configureStore,
+  ThunkAction,
+  Action
+} from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import premiumSlice from './premium';
 import userSlice from './user';
@@ -20,5 +24,13 @@ const store = configureStore({
     : getDefaultMiddleware()
   }
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
 
 export default store;

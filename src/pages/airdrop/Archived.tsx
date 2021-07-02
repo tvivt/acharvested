@@ -1,16 +1,23 @@
-import { useState } from 'react';
+import { useState, FunctionComponent } from 'react';
 import { Modal, Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { getLanguage } from '../../application/store/user';
 import { createUnique } from '../../application/shared';
+import { ArchivedEntity } from '../../application/shared/apis';
 import Loading from '../../application/components/Loading/Loading';
 import './Archived.css';
 
-const Archived = (props) => {
+
+interface ArchivedProps {
+  airdropHeight: number;
+  dataSource: ArchivedEntity[];
+}
+
+const Archived: FunctionComponent<ArchivedProps> = (props) => {
   const { dataSource, airdropHeight } = props;
   const language = useSelector(getLanguage);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [modalData, setModalData] = useState(null);
+  const [modalData, setModalData] = useState<ArchivedEntity | null>(null);
 
   const onCancel = () => {
     setIsModalVisible(false);

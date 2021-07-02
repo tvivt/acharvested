@@ -1,10 +1,20 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { ethers } from 'ethers';
+import Web3Modal from "web3modal";
 import store from './application/store';
 import './index.css';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
+
+declare global{
+  interface Window{
+    imToken: any;
+    provider: any;
+    web3Provider: ethers.providers.Web3Provider;
+    web3Modal: Web3Modal;
+  }
+}
 
 ReactDOM.render(
   <Provider store={store}>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import { fetchTotalByServerless } from './application/shared/apis';
-import { setAllTotal, getAccountTotal, getPriceTotal } from './application/store/total';
+import { setAllTotal, getAccounts, getPrice } from './application/store/total';
 import { setTokenlist } from './application/store/tokenlist';
 import { ResponseCode } from './application/shared/status';
 import MainMenu from './application/components/MainMenu/MainMenu';
@@ -19,8 +19,8 @@ function App(){
 
   const dispatch = useDispatch();
   const lock = useRef(true);
-  const accountTotal = useSelector(getAccountTotal);
-  const priceTotal = useSelector(getPriceTotal);
+  const accountTotal = useSelector(getAccounts);
+  const priceTotal = useSelector(getPrice);
 
   useEffect(() => {
     if (lock.current){
@@ -29,10 +29,10 @@ function App(){
         const { code, data } = response.data;
         if (code === ResponseCode.ok){
           dispatch(setAllTotal({
-            accountTotal: data.account_total,
-            learnTotal: data.learn_total,
-            potentialTotal: data.potential_total,
-            priceTotal: data.price_total
+            accounts: data.accounts,
+            learns: data.learns,
+            potentials: data.potentials,
+            price: data.price
           }));
         }
       });
@@ -43,8 +43,8 @@ function App(){
         const tokenlist = response.data;
         const tokens = response.data.tokens;
         const buyTokens = ['dai'];
-        const saved = [];
-        tokens.forEach((v) => {
+        const saved: any[] = [];
+        tokens.forEach((v: any) => {
           const symbolKey =  v.symbol.toLocaleLowerCase();
           if (buyTokens.indexOf(symbolKey) > -1){
             saved.push(v);
@@ -90,7 +90,7 @@ function App(){
           <span className='app-footer-divide'>-</span>
           <span>订阅用户({accountTotal})</span>
           <span className='app-footer-divide'>-</span>
-          <span>空投价值(${parseInt(priceTotal)})</span>
+          <span>空投价值(${Math.ceil(priceTotal)})</span>
         </div>
       </Router>
     </div>

@@ -1,20 +1,26 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Modal } from 'antd';
 import classnames from 'classnames';
 import { createUnique } from '../../application/shared';
-import { getPotentialTotal } from '../../application/store/total';
+import { PotentialEntity } from '../../application/shared/apis';
+import { getPotentials } from '../../application/store/total';
 import Buy from '../../application/components/Buy/Buy';
 import './Potential.css';
 
 const zh_CN = 'zh_CN';
 
-const Potential = (props) => {
+interface PotentialProps {
+  airdropHeight: number;
+  dataSource: PotentialEntity[];
+}
+
+const Potential: FunctionComponent<PotentialProps> = (props) => {
   const { dataSource, airdropHeight } = props;
-  const potentialTotal = useSelector(getPotentialTotal);
+  const potentialTotal = useSelector(getPotentials);
   const [ potentialStatus, setPotentialStatus ] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [modalData, setModalData] = useState(null);
+  const [modalData, setModalData] = useState<PotentialEntity| null>(null);
 
   const onCancel = () => {
     setIsModalVisible(false);
@@ -31,7 +37,7 @@ const Potential = (props) => {
     }
   }, [dataSource]);
 
-  const renderMarkText = (mark) => {
+  const renderMarkText = (mark: number) => {
     if (mark === 1){
       return '热';
     }

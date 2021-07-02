@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, FunctionComponent } from 'react';
 import { Modal, Button } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
@@ -7,14 +7,16 @@ import { getConnectWalletStatus } from '../../store/user';
 import { getSupport } from '../../store/tokenlist';
 import { ethers } from 'ethers';
 import DAIABI from '../../ABI/DAI.json';
-// import USDTABI from '../../ABI/USDT.json';
 import './Buy.css';
 
-// const { Option } = Select;
 const buyAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
 const buyPrice = ethers.utils.parseEther("120").toBigInt();
 
-const Buy = (props) => {
+interface BuyProps {
+  text: string;
+}
+
+const Buy: FunctionComponent<BuyProps> = (props) => {
 
   const { text } = props;
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -24,21 +26,16 @@ const Buy = (props) => {
   const [txText, setTxText] = useState('')
   const support = useSelector(getSupport);
   const connectWalletStatus = useSelector(getConnectWalletStatus);
-  const daiContract = useRef(null);
-  // const usdtContract = useRef(null);
+  const daiContract = useRef<ethers.Contract | null>(null);
 
   useEffect(() => {
     if (!daiContract.current && support.length > 0 && connectWalletStatus === 1){
       const web3Provider = getWeb3Provider();
-      daiContract.current = true;
       support.forEach((v) => {
         const symbolText = v.symbol.toLocaleLowerCase();
         const address = v.address;
         if (symbolText === 'dai'){
           daiContract.current = new ethers.Contract(address, DAIABI.dai, web3Provider.getSigner());
-        }
-        if (symbolText === 'usdt'){
-          // usdtContract.current = new ethers.Contract(address, USDTABI.usdt, web3Provider.getSigner());
         }
       });
     }
@@ -59,35 +56,20 @@ const Buy = (props) => {
     setTxText('')
   }
 
-  // const onChange = (value) => {
-  //   setSymbolValue(value);
-  // }
-
   const onOk = async() => {
     if (countStatus === 0 || countStatus === 3){
       setCountStatus(1);
       if (symbolValue === 'dai'){
-        daiContract.current.transfer(buyAddress, buyPrice).then((response) => {
+        daiContract.current!.transfer(buyAddress, buyPrice).then((response: any) => {
           const { hash } = response;
           setCountStatus(2);
           setTxText(hash);
-        }).catch((e) => {
+        }).catch((e: any) => {
           setErrorMessage(e.message);
           setCountStatus(3);
           setTxText('');
         });
       }
-      // if (symbolValue === 'usdt'){
-      //   usdtContract.current.transfer(buyAddress, buyPrice).then((response) => {
-      //     const { hash } = response;
-      //     setCountStatus(2);
-      //     setTxText(hash);
-      //   }).catch((e) => {
-      //     setErrorMessage(e.message);
-      //     setCountStatus(3);
-      //     setTxText('');
-      //   });
-      // }
     }
   }
 
@@ -165,17 +147,6 @@ const Buy = (props) => {
         </div>
         <div className='buy-desc'>
           订阅价格：120 {symbolValue.toLocaleUpperCase()} / 年
-          {/* <span className='buy-container'>
-            <Select 
-              defaultValue={symbolValue} 
-              style={{ width: 120, marginRight: '5px' }} 
-              onChange={onChange}
-              bordered={false}
-              dropdownClassName='buy-drop'
-            >
-              <Option value="dai">DAI</Option>
-            </Select>
-          </span> */}
         </div>
         <div className='buy-status'>
           支付状态：{buying} 

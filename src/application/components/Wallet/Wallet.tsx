@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect, useMemo, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3Modal from "web3modal";
+import { ethers } from 'ethers';
 import { Modal } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { 
@@ -14,7 +15,7 @@ import {
   setConnectWalletStatus
 } from '../../store/user';
 import { setPremiumDataSource } from '../../store/premium';
-import { INFURA_ID } from '../../../constants';
+import { INFURA_ID } from '../../shared/constants';
 import { 
   truncated,
   setWeb3Modal, 
@@ -27,8 +28,6 @@ import {
 import { fetchNonceByServerless, fetchVerifyResultByServerless } from '../../shared/apis';
 import { ResponseCode, ConnectWalletStatus } from '../../shared/status';
 import './index.css';
-
-const Ethers = require('ethers');
 
 const providerOptions = {
   walletconnect: {
@@ -62,7 +61,7 @@ const UpdateWalletUI = {
 const Wallet = () => {
 
   const dispatch = useDispatch();
-  const timer = useRef(null);
+  const timer = useRef<number | undefined>(undefined);
   const nonceLock = useRef(false);
   const addressLock = useRef(false);
   const signLock = useRef(false);
@@ -95,10 +94,11 @@ const Wallet = () => {
       setTimeout(() => {
         setUpdateWalletUIStatus(UpdateWalletUI.connect);
         if (!timer.current){
-          timer.current = setInterval(() => {
+          timer.current = window.setInterval(() => {
             const web3Provider = getWeb3Provider();
             if (web3Provider){
-              let address = web3Provider.provider.selectedAddress || web3Provider.provider.accounts[0];
+              const { selectedAddress, accounts} = web3Provider.provider as any;
+              const address = selectedAddress || accounts[0];
               if (address){
                 clearInterval(timer.current);
                 dispatch(setAddress(address));
@@ -118,8 +118,7 @@ const Wallet = () => {
   const fetchAccountData = async () => {
     setUpdateWalletUIStatus(UpdateWalletUI.load);
     const provider = await web3Modal.connect();
-    const web3Provider = new Ethers.providers.Web3Provider(provider);
-    console.log()
+    const web3Provider = new ethers.providers.Web3Provider(provider);
     setProvider(provider);
     setWeb3Provider(web3Provider);
     setWeb3Modal(web3Modal);
@@ -175,7 +174,7 @@ const Wallet = () => {
     }
   }
 
-  const onCancel = (e) => {
+  const onCancel = (e: MouseEvent) => {
     e.stopPropagation();
     setIsModalVisible(false);
   }

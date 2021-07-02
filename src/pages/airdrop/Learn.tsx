@@ -1,16 +1,22 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import classnames from 'classnames';
 import Buy from '../../application/components/Buy/Buy';
 import { createUnique } from '../../application/shared';
-import { getLearnTotal } from '../../application/store/total';
+import { LearnEntity } from '../../application/shared/apis';
+import { getLearns } from '../../application/store/total';
 import './Learn.css';
 
 const zh_CN = 'zh_CN';
 
-const Learn = (props) => {
+interface LearnProps {
+  airdropHeight: number;
+  dataSource: LearnEntity[];
+}
+
+const Learn: FunctionComponent<LearnProps> = (props) => {
   const { dataSource, airdropHeight } = props;
-  const learnTotal = useSelector(getLearnTotal);
+  const learnTotal = useSelector(getLearns);
   const [ learnStatus, setLearnStatus ] = useState(0);
 
   const learnClass = classnames({

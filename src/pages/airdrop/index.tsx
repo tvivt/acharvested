@@ -5,7 +5,7 @@ import { debounce } from 'lodash';
 import { getLearns, getPotentials } from '../../application/store/premium';
 import { getArchived, setArchived } from '../../application/store/archived';
 import { getAddress, getNonce, getSign } from '../../application/store/user';
-import { fetchArchived } from '../../application/shared/apis';
+import { fetchArchivedByServerless } from '../../application/shared/apis';
 import { ResponseCode } from '../../application/shared/status';
 import Wallet from "../../application/components/Wallet/Wallet";
 import Archived from './Archived';
@@ -26,7 +26,7 @@ const Airdrop = () => {
   const archived = useSelector(getArchived);
   const [ tabActiveKey, setTabActiveKey ] = useState("1");
   const firstLock = useRef(false);
-  const airdropDOM = useRef(null);
+  const airdropDOM = useRef<HTMLDivElement | null>(null);
   const [airdropHeight, setAirdropHeight] = useState(0);
   const resetLock = useRef(false);
 
@@ -34,7 +34,7 @@ const Airdrop = () => {
 
     if (!firstLock.current && !sign){
       firstLock.current = true;
-      fetchArchived(nonce, sign, address, 0).then(({data: archivedResponse}) => {
+      fetchArchivedByServerless(nonce, sign, address, 0).then(({data: archivedResponse}) => {
         if (archivedResponse.code === ResponseCode.ok){
           dispatch(setArchived(archivedResponse.data));
         }
@@ -42,7 +42,7 @@ const Airdrop = () => {
     }
 
     if (sign && archived.length === 9){
-      fetchArchived(nonce, sign, address, 0).then(({data: archivedResponse}) => {
+      fetchArchivedByServerless(nonce, sign, address, 0).then(({data: archivedResponse}) => {
         if (archivedResponse.code === ResponseCode.ok){
           dispatch(setArchived(archivedResponse.data));
         }
@@ -51,15 +51,15 @@ const Airdrop = () => {
 
     if (!resetLock.current){
       resetLock.current = true;
-      setAirdropHeight(airdropDOM.current.clientHeight);
+      setAirdropHeight(airdropDOM.current!.clientHeight);
       window.addEventListener('resize', debounce(() => {
-        setAirdropHeight(airdropDOM.current.clientHeight);
+        setAirdropHeight(airdropDOM.current!.clientHeight);
       }, 500));
     }
     
   }, [dispatch, nonce, sign, address, archived, airdropHeight]);
 
-  const tabOnChange = (key) => {
+  const tabOnChange = (key: string) => {
     setTabActiveKey(key);
   }
 
