@@ -158,7 +158,7 @@ const Checks = (props: ChecksProps) => {
     if (!sign){
       return (
         <div className='checks-buy'>
-          <Buy text={`自动检查符合学习策略（${learns}）`}/>
+          <Buy text={`自动检查是否符合学习策略（${learns}）`}/>
         </div>
       )
     }
