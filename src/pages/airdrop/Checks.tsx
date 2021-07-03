@@ -61,7 +61,9 @@ const contractResultProgress = async (checkAddress: string) => {
     }
     contractResult.push(contractResultItem);
   }
-  return contractResult;
+  const noResult = contractResult.filter(v => !v.check);
+  const yesResult = contractResult.filter(v => v.check);
+  return [...noResult, ...yesResult];
 }
 
 const Checks = (props: ChecksProps) => {
