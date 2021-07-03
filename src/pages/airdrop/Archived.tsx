@@ -18,6 +18,7 @@ const Archived: FunctionComponent<ArchivedProps> = (props) => {
   const language = useSelector(getLanguage);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalData, setModalData] = useState<ArchivedEntity | null>(null);
+  const contentHeight = airdropHeight - 200;
 
   const onCancel = () => {
     setIsModalVisible(false);
@@ -25,13 +26,11 @@ const Archived: FunctionComponent<ArchivedProps> = (props) => {
 
   if (dataSource.length === 0){
     return (
-      <div className='archived-loading'>
+      <div className='archived-loading' style={{height: `${contentHeight}px`}}>
         <Loading />
       </div>
     )
   }
-
-  const contentHeight = airdropHeight - 200;
 
   return (
     <div className='archived'>

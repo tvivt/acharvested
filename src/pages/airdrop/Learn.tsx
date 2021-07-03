@@ -35,7 +35,7 @@ const Learn: FunctionComponent<LearnProps> = (props) => {
   const renderContent = useMemo(() => {
     if (learnStatus === 0){
       return (
-        <Buy text={`操作策略（${learnTotal}）`}/>
+        <Buy text={`学习策略（${learnTotal}）`}/>
       )
     }
     if (learnStatus === 1){

@@ -11,6 +11,7 @@ import Wallet from "../../application/components/Wallet/Wallet";
 import Archived from './Archived';
 import Learn from './Learn';
 import Potential from './Potential';
+import Checks from './Checks';
 import './index.css';
 
 const { TabPane } = Tabs;
@@ -75,6 +76,10 @@ const Airdrop = () => {
     return <Potential dataSource={potentials} airdropHeight={airdropHeight} />
   }, [potentials, airdropHeight]);
 
+  const renderChecks = useMemo(() => {
+    return <Checks airdropHeight={airdropHeight} />
+  }, [airdropHeight]);
+
   return (
     <div className='airdrop' ref={airdropDOM}>
       <div className='airdrop-padding'>
@@ -89,14 +94,17 @@ const Airdrop = () => {
       <div className='airdrop-content'>
         <div className='airdrop-content-padding'>
           <Tabs defaultActiveKey={tabActiveKey} onChange={tabOnChange}>
-            <TabPane tab="归档" key="1">
+            <TabPane tab='归档' key='1'>
               {renderArchived}
             </TabPane>
-            <TabPane tab="学习" key="2">
+            <TabPane tab='学习' key='2'>
               {renderLearn}
             </TabPane>
-            <TabPane tab="潜在" key="3">
+            <TabPane tab='潜在' key='3'>
               {renderPotential}
+            </TabPane>
+            <TabPane tab='检查' key='4'>
+              {renderChecks}
             </TabPane>
           </Tabs>
         </div>

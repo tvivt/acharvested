@@ -102,3 +102,63 @@ export const fetchArchivedByServerless: ArchivedFunc = (nonce, sign, address, pa
     }
   });
 }
+
+interface CheckListContract{
+  name: string;
+  address: string;
+}
+
+export interface CheckListEntity{
+  type: string;
+  ask: string[];
+  contract: CheckListContract[];
+}
+
+type CheckListFunc = (nonce: string, sign: string, address: string) => AxiosPromise<Response<CheckListEntity>>;
+
+export const fetchCheckListByServerless: CheckListFunc = (nonce, sign, address) => {
+  const url = `${baseHost}/api/checklist`;
+  return axios({
+    url,
+    params: {
+      nonce,
+      sign,
+      address
+    }
+  });
+}
+
+interface ContentsResultItem{
+  name: string;
+  check: boolean;
+}
+
+interface ContentsResult{
+  contract: ContentsResultItem[];
+  ask: ContentsResultItem[]
+}
+
+interface Contents{
+  [key: string]: ContentsResult
+}
+
+export interface PremiumCheckEntity{
+  address: string;
+  type: string;
+  contents: Contents;
+}
+
+type PremiumcheckFunc = (nonce: string, sign: string, address: string, type: string) => AxiosPromise<Response<PremiumCheckEntity>>;
+
+export const fetchPremiumcheckByServerless: PremiumcheckFunc = (nonce, sign, address, type) => {
+  const url = `${baseHost}/api/premiumcheck`;
+  return axios({
+    url,
+    params: {
+      nonce,
+      sign,
+      address,
+      type
+    }
+  });
+}

@@ -44,12 +44,13 @@ function App(){
         const tokens = response.data.tokens;
         const buyTokens = ['dai'];
         const saved: any[] = [];
-        tokens.forEach((v: any) => {
-          const symbolKey =  v.symbol.toLocaleLowerCase();
+        for (const iterator of tokens) {
+          const symbolKey =  iterator.symbol.toLocaleLowerCase();
           if (buyTokens.indexOf(symbolKey) > -1){
-            saved.push(v);
+            saved.push(iterator);
+            break;
           }
-        });
+        }
         tokenlist.support = saved;
         dispatch(setTokenlist(tokenlist));
       });
