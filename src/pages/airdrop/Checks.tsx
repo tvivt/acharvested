@@ -169,6 +169,20 @@ const Checks = (props: ChecksProps) => {
       const keys = Object.keys(checkResult!.contents);
       return (
         <div className='checks-content' style={{height: `${contentHeight}px`}}>
+          <div className='checks-header'>
+            <span style={{marginRight: '15px', fontSize: '15px', fontWeight: 'bold'}}>
+              颜色说明：
+            </span>
+            <span style={{marginRight: '10px'}}>
+              <Badge status="success" />满足条件 
+            </span>
+            <span style={{marginRight: '10px'}}>
+              <Badge status="error" />未满足条件 
+            </span>
+            <span style={{marginRight: '10px'}}>
+              <Badge status="default" />无法检测 
+            </span>
+          </div>
           {
             keys.map((v) => {
               return (
