@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ethers } from 'ethers';
-import { Badge, Button } from 'antd';
+import { Badge } from 'antd';
 import Loading from '../../application/components/Loading/Loading';
 import Buy from '../../application/components/Buy/Buy';
 import { getAddress, getNonce, getSign } from '../../application/store/user';
@@ -29,11 +29,6 @@ interface CheckItem{
 interface CheckResultData{
   name: string;
   check: boolean;
-}
-
-interface CheckResult{
-  contract: CheckResultData[];
-  ask: CheckResultData[];
 }
 
 interface ChecksProps {
@@ -141,7 +136,7 @@ const Checks = (props: ChecksProps) => {
         }
       });
     }
-  },[sign, checkStatus]);
+  },[sign, checkStatus, address, checkResult, nonce]);
 
   const renderBadge = useCallback((check: boolean, type: string) => {
     if (checkStatus === 1 && type === 'ask'){
@@ -153,7 +148,8 @@ const Checks = (props: ChecksProps) => {
     if (!check){
       return <Badge status="error" />;
     }
-  }, [checkStatus])
+  }, [checkStatus]);
+
   const renderCheckResult = useMemo(() => {
     if (!sign){
       return (
@@ -214,7 +210,7 @@ const Checks = (props: ChecksProps) => {
         </div>
       )
     }
-  }, [checkStatusUI, sign]);
+  }, [checkStatusUI, sign, learns, checkResult, contentHeight, renderBadge]);
   return (
     <div className='checks'>
       {renderCheckResult}
