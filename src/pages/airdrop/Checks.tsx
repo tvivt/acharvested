@@ -54,12 +54,17 @@ const checkBalance = async (contract: ethers.Contract, address: string) => {
 const contractResultProgress = async (checkAddress: string) => {
   const contractResult: CheckResultData[] = []
   for (const contractItem of checkItem.contract) {
-    const balanceResult = await checkBalance(contractItem.contract, checkAddress);
-    const contractResultItem = {
-      name: contractItem.name,
-      check: balanceResult
+    try{
+      const balanceResult = await checkBalance(contractItem.contract, checkAddress);
+      const contractResultItem = {
+        name: contractItem.name,
+        check: balanceResult
+      }
+      contractResult.push(contractResultItem);
+    } catch(e){
+      console.log(e)
+      console.log(contractItem)
     }
-    contractResult.push(contractResultItem);
   }
   const noResult = contractResult.filter(v => !v.check);
   const yesResult = contractResult.filter(v => v.check);
@@ -134,6 +139,8 @@ const Checks = (props: ChecksProps) => {
             });
             setCheckStatus(1);
             setCheckStatusUI(1);
+          }).catch((e) => {
+            
           });
         }
       });
