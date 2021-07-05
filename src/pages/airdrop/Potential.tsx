@@ -18,7 +18,7 @@ interface PotentialProps {
 const Potential: FunctionComponent<PotentialProps> = (props) => {
   const { dataSource, airdropHeight } = props;
   const potentialTotal = useSelector(getPotentials);
-  const [ potentialStatus, setPotentialStatus ] = useState(0);
+  const [potentialStatus, setPotentialStatus] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalData, setModalData] = useState<PotentialEntity| null>(null);
 
@@ -85,7 +85,7 @@ const Potential: FunctionComponent<PotentialProps> = (props) => {
     }
   }, [potentialStatus, dataSource, potentialTotal, contentHeight]);
 
-  const renderModalContent = useMemo(() => {
+  const renderModalContent = () => {
     if (!modalData) {
       return null;
     }
@@ -131,7 +131,7 @@ const Potential: FunctionComponent<PotentialProps> = (props) => {
         {renderGuess()}
       </div>
     )
-  }, [modalData])
+  }
 
   return (
     <div className={potentialClass}>
@@ -153,7 +153,7 @@ const Potential: FunctionComponent<PotentialProps> = (props) => {
           </Button>
         ]}
       >
-        {renderModalContent}
+        {renderModalContent()}
       </Modal>
     </div>
   );
