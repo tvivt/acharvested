@@ -12,7 +12,6 @@ import {
 } from '../../application/shared/apis';
 import { ResponseCode } from '../../application/shared/status';
 import { getWeb3Provider, createUnique } from '../../application/shared';
-import { getLearns } from '../../application/store/total';
 import balanceOfABI from '../../application/ABI/balanceOf.json';
 import './Checks.css';
 
@@ -82,7 +81,6 @@ const Checks = (props: ChecksProps) => {
   const [checkStatusUI, setCheckStatusUI] = useState(0);
   const [checkStatus, setCheckStatus] = useState(0);
   const contentHeight = airdropHeight - 200;
-  const learns = useSelector(getLearns);
  
   useEffect(() => {
     if (checkItem.contract.length > 0){
@@ -233,7 +231,7 @@ const Checks = (props: ChecksProps) => {
         </div>
       )
     }
-  }, [checkStatusUI, sign, learns, checkResult, contentHeight, renderBadge]);
+  }, [checkStatusUI, sign, checkResult, contentHeight, renderBadge]);
   return (
     <div className='checks'>
       {renderCheckResult}
