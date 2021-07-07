@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
 import {
   PieChartOutlined,
-  ContainerOutlined,
-  BankOutlined,
   QuestionCircleOutlined
 } from '@ant-design/icons';
 import LogoPNG from '../../../images/logo.png';
@@ -27,12 +25,6 @@ const MainMenu = () => {
         >
           <Menu.Item key="1" icon={<span className='icon'><PieChartOutlined /></span>}>
             <Link to='/'>数据分析</Link>
-          </Menu.Item>
-          <Menu.Item key="2" icon={<span className='icon'><BankOutlined /></span>}>
-            <Link to='/automatic'>复利定投</Link>
-          </Menu.Item>
-          <Menu.Item key="3" icon={<span className='icon'><ContainerOutlined /></span>}>
-            <Link to='/plugins'>插件集市</Link>
           </Menu.Item>
         </Menu> 
         <div className='left-menu-feedback'>
