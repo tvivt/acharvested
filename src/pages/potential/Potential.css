@@ -1,0 +1,64 @@
+.potential-content{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.potential-box{
+  width: 50%;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.potential-box-padding{
+  padding: 10px;
+}
+
+.potential-box-content{
+  background: #e6e6e6;
+  padding: 20px 10px 20px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.potential-icon{
+  margin-right: 10px;
+}
+
+.potential-icon img{
+  width: 30px;
+  border-radius: 15px;
+}
+
+.potential-name{
+  font-size: 16px;
+}
+
+.potential-mark{
+  font-size: 12px;
+  color: red;
+  margin-left: 5px;
+}
+
+.potential-url{
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  color: rgba(59,130,246,0.5);
+  padding-right: 10px;
+}
+
+.potential-modal .ant-btn{
+  border: 1px solid #001529 !important;
+  color: #001529 !important;
+}
+
+.potential-modal .ant-btn-primary{
+  background: #001529 !important;
+  border-color: #001529 !important;
+}
+
+.potential-modal .ant-btn-primary span{
+  color: #fff !important;
+}

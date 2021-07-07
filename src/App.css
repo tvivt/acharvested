@@ -1,6 +1,85 @@
+@import '~normalize.css/normalize.css';
 @import '~antd/dist/antd.css';
 
 .app{
+  color: #000;
+}
+
+.app-header{
+  width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: #fff;
+}
+
+.app-header-container{
+  position: relative;
+}
+
+.app-header-content{
+  width: 1450px;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 1300px) {
+  .app-header-content{
+    width: 1068px;
+  }
+}
+
+@media screen and (max-width: 1550px) {
+  .app-header-content{
+    width: 1250px;
+  }
+}
+
+.app-header-cc{
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  border-bottom: 2px solid #000;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@media screen and (max-width: 991px) {
+  .app-header-cc{
+    height: auto;
+  }
+}
+
+.app-header-logo{
+  width: 60px;
+  height: 60px;
+}
+
+.app-content{
+  width: 1450px;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 1300px) {
+  .app-content{
+    width: 1068px;
+  }
+}
+
+@media screen and (max-width: 1550px) {
+  .app-content{
+    width: 1250px;
+  }
+}
+
+.app-main{
+  padding-top: 26px;
+}
+
+/* .app{
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -62,4 +141,4 @@
 .app-footer-divide{
   margin-left: 6px;
   margin-right: 6px;
-}
+} */

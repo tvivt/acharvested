@@ -10,7 +10,7 @@ import DAIABI from '../../ABI/DAI.json';
 import './Buy.css';
 
 const buyAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
-const buyPrice = ethers.utils.parseEther("120").toBigInt();
+const buyPrice = ethers.utils.parseEther("150").toBigInt();
 
 interface BuyProps {
   text: string;
@@ -111,8 +111,7 @@ const Buy: FunctionComponent<BuyProps> = (props) => {
 
   return (
     <div className='we-buy'>
-      <span className='we-buy-text'>{text}</span>
-      <Button onClick={openModal}>订阅解锁</Button>
+      <div onClick={openModal} className='buy-button'>{text}</div>
       <Modal
         className='we-close'
         centered
@@ -146,7 +145,7 @@ const Buy: FunctionComponent<BuyProps> = (props) => {
           <span>若支付请勿关闭此窗口</span>
         </div>
         <div className='buy-desc'>
-          订阅价格：120 {symbolValue.toLocaleUpperCase()} / 年
+          订阅价格：150 {symbolValue.toLocaleUpperCase()} / 年
         </div>
         <div className='buy-status'>
           支付状态：{buying} 

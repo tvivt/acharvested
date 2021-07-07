@@ -1,0 +1,18 @@
+.checks-loading{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.checks-header{
+  margin-bottom: 20px;
+}
+.checks-box-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.checks-box-name{
+  font-size: 14px;
+}

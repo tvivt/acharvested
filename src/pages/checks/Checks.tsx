@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux';
 import { ethers } from 'ethers';
 import { Badge } from 'antd';
 import Loading from '../../application/components/Loading/Loading';
-import Buy from '../../application/components/Buy/Buy';
 import { getAddress, getNonce, getSign } from '../../application/store/user';
 import { 
   fetchCheckListByServerless,
   fetchPremiumcheckByServerless,
   PremiumCheckEntity
 } from '../../application/shared/apis';
+import { getLearns } from '../../application/store/premium';
 import { ResponseCode } from '../../application/shared/status';
 import { getWeb3Provider, createUnique } from '../../application/shared';
 import balanceOfABI from '../../application/ABI/balanceOf.json';
@@ -28,10 +28,6 @@ interface CheckItem{
 interface CheckResultData{
   name: string;
   check: boolean;
-}
-
-interface ChecksProps {
-  airdropHeight: number;
 }
 
 const checkItem: CheckItem = {
@@ -70,19 +66,21 @@ const contractResultProgress = async (checkAddress: string) => {
   return [...noResult, ...yesResult];
 }
 
-const Checks = (props: ChecksProps) => {
-
-  const { airdropHeight } = props;
+const Checks = () => {
   const address = useSelector(getAddress);
   const nonce = useSelector(getNonce);
   const sign = useSelector(getSign);
+  const learns = useSelector(getLearns);
   const [checkResult, setCheckResult] = useState<PremiumCheckEntity | null>(null);
   const checklistLock = useRef(true);
   const [checkStatusUI, setCheckStatusUI] = useState(0);
   const [checkStatus, setCheckStatus] = useState(0);
-  const contentHeight = airdropHeight - 200;
  
   useEffect(() => {
+    if (learns.length === 0){
+      window.location.href = '/';
+      return
+    }
     if (checkItem.contract.length > 0){
       setCheckStatus(1);
     }
@@ -143,7 +141,7 @@ const Checks = (props: ChecksProps) => {
         }
       });
     }
-  },[sign, checkStatus, address, checkResult, nonce]);
+  },[sign, checkStatus, address, checkResult, nonce, learns]);
 
   const renderBadge = useCallback((check: boolean, type: string) => {
     if (checkStatus === 1 && type === 'ask'){
@@ -158,16 +156,9 @@ const Checks = (props: ChecksProps) => {
   }, [checkStatus]);
 
   const renderCheckResult = useMemo(() => {
-    if (!sign){
-      return (
-        <div className='checks-buy'>
-          <Buy text={`自动检查地址符合多少空投条件`}/>
-        </div>
-      )
-    }
     if (checkStatusUI === 0){
       return (
-        <div className='checks-loading' style={{height: `${contentHeight}px`}}>
+        <div className='checks-loading'>
           <Loading />
         </div>
       )
@@ -175,16 +166,16 @@ const Checks = (props: ChecksProps) => {
     if (checkStatusUI === 1){
       const keys = Object.keys(checkResult!.contents);
       return (
-        <div className='checks-content' style={{height: `${contentHeight}px`}}>
+        <div className='checks-content'>
           <div className='checks-header'>
             <span style={{marginRight: '15px', fontSize: '15px', fontWeight: 'bold'}}>
               颜色说明：
             </span>
             <span style={{marginRight: '10px'}}>
-              <Badge status="success" />满足条件 
+              <Badge status="error" />未满足条件 
             </span>
             <span style={{marginRight: '10px'}}>
-              <Badge status="error" />未满足条件 
+              <Badge status="success" />满足条件 
             </span>
             <span style={{marginRight: '10px'}}>
               <Badge status="default" />无法检测 
@@ -231,7 +222,7 @@ const Checks = (props: ChecksProps) => {
         </div>
       )
     }
-  }, [checkStatusUI, sign, checkResult, contentHeight, renderBadge]);
+  }, [checkStatusUI, checkResult, renderBadge]);
   return (
     <div className='checks'>
       {renderCheckResult}

@@ -1,0 +1,98 @@
+.archived-ad{
+  width: 100%;
+}
+
+.archived-img{
+  display: flex;
+  flex-direction: row;
+  background: #e6e6e6;
+}
+
+.img-book{
+  width: 55%;
+}
+
+.archived-text-container{
+  width: 45%;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.archived-text-padding{
+  background: #e6e6e6;
+  padding: 20px;
+}
+
+.section-heading{
+  background: #000;
+  padding: 0 0 0 13px;
+  height: 40px;
+  margin-top: 20px;
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.section-heading img{
+  margin-right: 8px;
+}
+
+.archived-content{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.archived-loading{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+}
+
+.archived-box{
+  width: 50%;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.archived-box-padding{
+  padding: 10px;
+}
+
+.archived-box-content{
+  background: #e6e6e6;
+  padding: 20px 10px 20px 10px;
+}
+
+.archived-box-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 16px;
+}
+
+.archived-box-header img{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+
+.archived-modal .ant-btn{
+  border: 1px solid #001529 !important;
+  color: #001529 !important;
+}
+
+.archived-modal .ant-btn-primary{
+  background: #001529 !important;
+  border-color: #001529 !important;
+}
+
+.archived-modal .ant-btn-primary span{
+  color: #fff !important;
+}

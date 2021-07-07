@@ -1,44 +1,40 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu } from 'antd';
-import {
-  PieChartOutlined,
-  QuestionCircleOutlined
-} from '@ant-design/icons';
-import LogoPNG from '../../../images/logo.png';
+import { useSelector } from 'react-redux';
+import { getLearns } from '../../store/premium';
+import Wallet from '../Wallet/Wallet';
+import Buy from '../Buy/Buy';
 import './index.css';
 
 const MainMenu = () => {
+  const dataSource = useSelector(getLearns);
+  const renderLink = useMemo(() => {
+    if (dataSource.length > 0){
+      return (
+        <>
+          <Link to='/learn'>策略范围</Link>
+          <Link to='/potential'>潜在空投</Link>
+          <Link to='/checks'>自动检查</Link>
+        </>
+      )
+    }
+
+    return (
+      <>
+        <Buy text='策略范围' />
+        <Buy text='潜在空投' />
+        <Buy text='自动检查'/>
+      </>
+    )
+  }, [dataSource])
 
   return (
-    <div className='left-menu'>
-      <div className='left-menu-logo'>
-        <img src={LogoPNG} alt=''/>
-        <span>桑田</span>
-      </div>
-      <div className='left-menu-content'>
-        <Menu
-          className='main-menu'
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          mode="inline"
-          theme="dark"
-        >
-          <Menu.Item key="1" icon={<span className='icon'><PieChartOutlined /></span>}>
-            <Link to='/'>数据分析</Link>
-          </Menu.Item>
-        </Menu> 
-        <div className='left-menu-feedback'>
-          <span className='feedback-icon'>
-            <QuestionCircleOutlined width='' />
-          </span>
-          <a 
-            href='https://github.com/icepy/acharvested/issues/1'
-            target='_blank'
-            rel="noreferrer"
-          >
-            Feedback
-          </a>
-        </div>        
+    <div className='menu-content'>
+      <Link to='/'>空投归档</Link>
+      {renderLink}
+      
+      <div className='menu-wallet'>
+        <Wallet />
       </div>
     </div>
   )

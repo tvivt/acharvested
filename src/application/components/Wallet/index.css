@@ -4,8 +4,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #001529;
-  color: #001529;
+  border: 1px solid #000;
+  color: #000;
   cursor: pointer;
   font-size: 16px;
   border-radius: 20px;
@@ -16,13 +16,13 @@
 }
 
 .wallet-modal .ant-btn{
-  border: 1px solid #001529 !important;
-  color: #001529 !important;
+  border: 1px solid #000 !important;
+  color: #000 !important;
 }
 
 .wallet-modal .ant-btn-primary{
-  background: #001529 !important;
-  border-color: #001529 !important;
+  background: #000 !important;
+  border-color: #000 !important;
   
 }
 

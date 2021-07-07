@@ -1,96 +1,22 @@
-.left-menu{
-  color: white;
-  width: 256px;
-  height: 100%;
-  overflow: visible;
-  position: relative;
-  background-color: #001529;
-  display: grid;
-  grid-template-rows: 0fr auto 0fr;
-}
-
-.left-menu-content{
-  display: flex;
-  flex-direction: column;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-}
-
-.main-menu .icon span{
-  font-size: 20px !important;
-}
-.left-menu-logo{
-  height: 100px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding-left: 12px;
-  padding-top: 15px;
-}
-
-.left-menu-logo img{
-  width: 50px;
-  height: 50px;
-}
-
-.left-menu-logo span{
-  font-size: 20px;
-}
-
-.left-menu-feedback{
-  padding-left: 20px;
-  padding-bottom: 15px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.feedback-icon{
-  font-size: 20px;
-  margin-right: 10px;
-}
-
-.left-menu-feedback a{
-  color: #fff;
-}
-
-.left-menu-feedback a:hover{
-  color: #fff;
-}
-
-.ant-menu-item-selected{
-  background: none !important;
-}
-
-.lm-box{
-  padding-top: 5px;
-  padding-bottom: 5px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 20px;
-  background-color: #001529;
-  cursor: pointer;
-}
-
-.lm-box-name{
-  color: aliceblue;
-  padding-left: 20px;
-}
-
-.lm-box-wallet{
-  width: 40px;
+.menu-content{
   flex: 1;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-  padding-right: 20px;
+  align-items: center;
 }
 
-.lm-box-wallet img{
-  width: 40px;
+.menu-content a{
+  font-size: 18px;
+  color: #000;
+  margin-right: 8px;
+}
+
+.menu-content a:hover{
+  color: #000;
+}
+
+.menu-wallet{
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }

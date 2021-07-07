@@ -1,41 +1,28 @@
-import { useState, useEffect, useMemo, FunctionComponent } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Modal } from 'antd';
-import classnames from 'classnames';
 import { createUnique } from '../../application/shared';
+import { getPotentials } from '../../application/store/premium';
 import { PotentialEntity } from '../../application/shared/apis';
-import { getPotentials } from '../../application/store/total';
-import Buy from '../../application/components/Buy/Buy';
 import './Potential.css';
 
 const zh_CN = 'zh_CN';
 
-interface PotentialProps {
-  airdropHeight: number;
-  dataSource: PotentialEntity[];
-}
-
-const Potential: FunctionComponent<PotentialProps> = (props) => {
-  const { dataSource, airdropHeight } = props;
-  const potentialTotal = useSelector(getPotentials);
-  const [potentialStatus, setPotentialStatus] = useState(0);
+const Potential = () => {
+  const dataSource = useSelector(getPotentials);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalData, setModalData] = useState<PotentialEntity| null>(null);
 
+  useEffect(() => {
+    if (dataSource.length === 0){
+      window.location.href = '/';
+      return
+    }
+  } ,[dataSource]);
+  
   const onCancel = () => {
     setIsModalVisible(false);
   }
-
-  const potentialClass = classnames({
-    'potential': true,
-    'potential-0': potentialStatus === 0
-  });
-
-  useEffect(() => {
-    if (dataSource && dataSource.length > 0){
-      setPotentialStatus(1);
-    }
-  }, [dataSource]);
 
   const renderMarkText = (mark: number) => {
     if (mark === 1){
@@ -47,43 +34,37 @@ const Potential: FunctionComponent<PotentialProps> = (props) => {
     return '';
   }
 
-  const contentHeight = airdropHeight - 200;
-
   const renderContent = useMemo(() => {
-    if (potentialStatus === 0){
-      return (
-        <Buy text={`潜在空投（${potentialTotal}）`}/>
-      )
-    }
-
-    if (potentialStatus === 1){
-      return (
-        <div className='potential-content' style={{height: `${contentHeight}px`}}>
-          {
-            dataSource.map((v) => {
-              return (
-                <div className='potential-box' key={createUnique()} onClick={() => {
-                  setIsModalVisible(true)
-                  setModalData(v);
-                }}>
-                  <div className='potential-icon'>
-                    <img src={v.icon} alt=''/>
-                  </div>
-                  <div className='potential-name'>
-                    {v.name}
-                    <span className='potential-mark'>{renderMarkText(v.mark)}</span>
-                  </div>
-                  <div className='potential-url'>
-                    {v.url}
+    return (
+      <div className='potential-content'>
+        {
+          dataSource.map((v) => {
+            return (
+              <div className='potential-box' key={createUnique()} onClick={() => {
+                setIsModalVisible(true)
+                setModalData(v);
+              }}>
+                <div className='potential-box-padding'>
+                  <div className='potential-box-content'>
+                    <div className='potential-icon'>
+                      <img src={v.icon} alt=''/>
+                    </div>
+                    <div className='potential-name'>
+                      {v.name}
+                      <span className='potential-mark'>{renderMarkText(v.mark)}</span>
+                    </div>
+                    <div className='potential-url'>
+                      {v.url}
+                    </div>
                   </div>
                 </div>
-              )
-            })
-          }
-        </div>
-      )
-    }
-  }, [potentialStatus, dataSource, potentialTotal, contentHeight]);
+              </div>
+            )
+          })
+        }
+      </div>
+    )
+  }, [dataSource]);
 
   const renderModalContent = () => {
     if (!modalData) {
@@ -134,10 +115,10 @@ const Potential: FunctionComponent<PotentialProps> = (props) => {
   }
 
   return (
-    <div className={potentialClass}>
+    <div className='potential'>
       {renderContent}
       <Modal
-        className='archived-modal'
+        className='potential-modal'
         centered
         visible={isModalVisible}
         closable={false}

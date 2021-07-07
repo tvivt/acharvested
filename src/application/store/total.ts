@@ -24,8 +24,8 @@ const totalSlice = createSlice({
 });
 
 export const { setAllTotal } = totalSlice.actions;
-export const getLearns = (state: RootState) => state.total.learns;
-export const getPotentials = (state: RootState) => state.total.potentials; 
+export const getLearnTotal = (state: RootState) => state.total.learns;
+export const getPotentialTotal = (state: RootState) => state.total.potentials; 
 export const getAccounts = (state: RootState) => state.total.accounts; 
 export const getPrice = (state: RootState) => state.total.price; 
 

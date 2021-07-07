@@ -139,6 +139,7 @@ const Wallet = () => {
 
     if (updateWalletUIStatus === 2 && !signLock.current){
       signLock.current = true;
+      setUpdateWalletUIStatus(0);
       createSign(nonce, address).then((sign) => {
         fetchVerifyResultByServerless(nonce, sign, address).then((response) => {
           const { code, data } = response.data;
@@ -192,7 +193,7 @@ const Wallet = () => {
       return '连接钱包';
     }
     if (updateWalletUIStatus === 2){
-      return '验证钱包';
+      return '签名登录';
     }
     if (updateWalletUIStatus === 3){
       return truncated(address);

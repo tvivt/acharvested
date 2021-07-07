@@ -1,8 +1,9 @@
-.we-close .ant-btn{
-  border: 1px solid #001529 !important;
-  color: #001529 !important;
+.buy-button{
+  font-size: 18px;
+  color: #000;
+  margin-right: 8px;
+  cursor: pointer;
 }
-
 .we-close{
   font-size: 14px;
 }
@@ -25,12 +26,4 @@
 
 .buy-desc{
   margin-bottom: 10px;
-}
-
-.buy-container{
-  
-}
-
-.buy-drop{
-
 }
