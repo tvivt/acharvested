@@ -1,3 +1,7 @@
+.checks{
+  padding-top: 26px;
+}
+
 .checks-loading{
   width: 100%;
   display: flex;
