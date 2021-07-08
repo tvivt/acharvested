@@ -2,6 +2,10 @@
   padding-top: 26px;
 }
 
+.checks-content{
+  padding-left: 10px;
+  padding-right: 10px;
+}
 .checks-loading{
   width: 100%;
   display: flex;

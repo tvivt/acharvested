@@ -8,6 +8,15 @@
   width: 50%;
 }
 
+@media screen and (max-width: 750px) {
+  .learn-content{
+    flex-direction: column;
+  }
+  .learn-box{
+    width: 100%;
+  }
+}
+
 .learn-padding{
   padding: 20px 10px 20px 10px;
 }

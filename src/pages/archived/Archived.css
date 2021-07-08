@@ -23,6 +23,18 @@
   font-size: 16px;
 }
 
+@media screen and (max-width: 750px) {
+  .archived-img{
+    flex-direction: column;
+  }
+  .img-book{
+    width: 100%;
+  }
+  .archived-text-container{
+    width: 100%;
+  }
+}
+
 .archived-text-padding{
   background: #e6e6e6;
   padding: 20px;
@@ -62,6 +74,15 @@
   width: 50%;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 620px) {
+  .archived-content{
+    flex-direction: column;
+  }
+  .archived-box{
+    width: 100%;
+  }
 }
 
 .archived-box-padding{

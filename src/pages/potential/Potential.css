@@ -4,10 +4,20 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+
 .potential-box{
   width: 50%;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 750px) {
+  .potential-content{
+    flex-direction: column;
+  }
+  .potential-box{
+    width: 100%;
+  }
 }
 
 .potential-box-padding{
