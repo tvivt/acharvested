@@ -9,7 +9,7 @@ import { ethers } from 'ethers';
 import DAIABI from '../../ABI/DAI.json';
 import './Buy.css';
 
-const buyAddress = '0x1A56d61142AC107dbC46f1c15a559906D84eEd59';
+const buyAddress = '0x09A8eA750a38A81b48E3AADF033F4d5095e76b2C';
 const buyPrice = ethers.utils.parseEther("150").toBigInt();
 
 interface BuyProps {
