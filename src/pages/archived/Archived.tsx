@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Modal, Button } from 'antd';
+import { parse } from 'usedjs/lib/querystring';
 import { getArchived, setArchived } from '../../application/store/archived';
 import { getAddress, getNonce, getSign, getLanguage } from '../../application/store/user';
 import { getAccounts, getPrice } from '../../application/store/total';
@@ -24,14 +25,29 @@ const Archived = () => {
   const firstLock = useRef(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalData, setModalData] = useState<ArchivedEntity | null>(null);
-
+  
   useEffect(() => {
+    
 
     if (!firstLock.current && !sign){
       firstLock.current = true;
+      const search = parse(window.location.search.substr(1));
       fetchArchivedByServerless(nonce, sign, address, 0).then(({data: archivedResponse}) => {
         if (archivedResponse.code === ResponseCode.ok){
-          dispatch(setArchived(archivedResponse.data));
+          const { data } = archivedResponse;
+          dispatch(setArchived(data));
+          const searchItem = search.item;
+          if (searchItem){
+            const searchItemData = data.filter((v) => {
+              const { name } = v;
+              const newName = name.replace(/\s*/g,"");
+              return searchItem === newName.toLocaleLowerCase()
+            })[0];
+            if (searchItemData){
+              setModalData(searchItemData);
+              setIsModalVisible(true);
+            }
+          }
         }
       });
     }

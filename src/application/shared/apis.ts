@@ -82,13 +82,15 @@ interface RulesEntity{
 }
 
 export interface ArchivedEntity{
-  name: string;
   icon: string;
+  name: string;
+  rules: RulesEntity;
+  token: string;
+  total: number;
   url: string;
-  rules: RulesEntity
 }
 
-type ArchivedFunc = (nonce: string, sign: string, address: string, page?: number) => AxiosPromise<Response<ArchivedEntity>>;
+type ArchivedFunc = (nonce: string, sign: string, address: string, page?: number) => AxiosPromise<Response<ArchivedEntity[]>>;
 
 export const fetchArchivedByServerless: ArchivedFunc = (nonce, sign, address, page) => {
   const url = `${baseHost}/api/archived`;
