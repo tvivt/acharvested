@@ -40,11 +40,11 @@ const providerOptions = {
 
 const web3Modal = new Web3Modal({
   theme: {
-    background: "#001529",
+    background: "#000",
     main: "rgba(255, 255, 255, 0.65)",
     secondary: "rgb(136, 136, 136)",
     border: "rgba(195, 195, 195, 0.14)",
-    hover: "#001529"
+    hover: "#000"
   },
   network: "mainnet",
   cacheProvider: true,
