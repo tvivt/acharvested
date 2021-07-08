@@ -14,7 +14,7 @@ const MainMenu = () => {
         <>
           <Link to='/learn'>策略范围</Link>
           <Link to='/potential'>潜在空投</Link>
-          <Link to='/checks'>自动检查</Link>
+          <Link to='/checks'>智能检查</Link>
         </>
       )
     }
@@ -23,7 +23,7 @@ const MainMenu = () => {
       <>
         <Buy text='策略范围' />
         <Buy text='潜在空投' />
-        <Buy text='自动检查'/>
+        <Buy text='智能检查'/>
       </>
     )
   }, [dataSource])
