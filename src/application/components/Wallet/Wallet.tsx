@@ -161,7 +161,7 @@ const Wallet = () => {
               yuque: [],
               code: 1
             }));
-            alert('无法验证，原因是您不在许可名单内 !');
+            alert('无法验证，原因是您未购买订阅 !');
             return;
           }
         });
