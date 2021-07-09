@@ -1,13 +1,18 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { createUnique } from '../../application/shared';
-import { getLearns } from '../../application/store/premium';
+import { getLearns, getYuque } from '../../application/store/premium';
+import DashedPNG from '../../images/dashed-lines-white.png';
 import './Learn.css';
 
 const zh_CN = 'zh_CN';
 
 const Learn = () => {
   const dataSource = useSelector(getLearns);
+  const yuques = useSelector(getYuque);
+  const yuque = yuques[0];
+  const url = yuque ? yuque.url : '';
+  const password = yuque ? yuque.password : '';
   
   useEffect(() => {
     if (dataSource.length === 0){
@@ -18,6 +23,29 @@ const Learn = () => {
 
   return (
     <div className='learn'>
+      <div className='section-heading'>
+        <img src={DashedPNG} alt='' />
+        操作指南
+      </div>
+      <div className='learn-getstart'>
+        <div>
+          访问：
+          <a
+            href={url}
+            target='_blank'
+            rel='noreferrer'
+          >
+            {url}
+          </a>
+        </div>
+        <div>
+          密码：{password}
+        </div>
+      </div>
+      <div className='section-heading'>
+        <img src={DashedPNG} alt='' />
+        策略范围
+      </div>
       <div className='learn-content'>
         {
           dataSource.map((v) => {
