@@ -72,3 +72,20 @@
 .potential-modal .ant-btn-primary span{
   color: #fff !important;
 }
+
+.p-m-title{
+  font-size: 18px;
+  margin-bottom: 2px;
+  font-weight: bold;
+}
+
+.p-m-content{
+  font-size: 14px;
+}
+
+.p-m-guess{
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 2px;
+}
