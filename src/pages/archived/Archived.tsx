@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { LoadingOutlined } from '@ant-design/icons';
+import { 
+  LoadingOutlined,
+  TwitterOutlined,
+  GithubOutlined
+} from '@ant-design/icons';
 import { Modal, Button } from 'antd';
 import { parse } from 'usedjs/lib/querystring';
 import { getArchived, setArchived } from '../../application/store/archived';
@@ -11,6 +15,7 @@ import { fetchArchivedByServerless, ArchivedEntity } from '../../application/sha
 import { ResponseCode } from '../../application/shared/status';
 import BookPNG from '../../images/book.jpeg';
 import DashedPNG from '../../images/dashed-lines-white.png';
+import DiscordPNG from '../../images/discord.png';
 import './Archived.css';
 
 const Archived = () => {
@@ -115,6 +120,39 @@ const Archived = () => {
             )
           })
         }
+      </div>
+      <div className='section-heading'>
+        <img src={DashedPNG} alt='' />
+        社区网络
+      </div>
+      <div className='archived-footer'>
+        <a
+          href='https://github.com/icepy/acharvested'
+          target='_blank' 
+          rel='noreferrer'
+        >
+          <span>
+            <GithubOutlined />
+          </span>
+        </a>
+        <a
+          href='https://discord.gg/HZubnvDsgY'
+          target='_blank' 
+          rel='noreferrer'
+        >
+          <span>
+            <img src={DiscordPNG} alt=''/>
+          </span>
+        </a>
+        <a
+          href='https://twitter.com/foricepy'
+          target='_blank' 
+          rel='noreferrer'
+        >
+          <span>
+            <TwitterOutlined />
+          </span>
+        </a>
       </div>
       <Modal
         className='archived-modal'

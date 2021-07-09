@@ -107,6 +107,36 @@
   margin-right: 10px;
 }
 
+.archived-footer{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+}
+
+.archived-footer a{
+  color: #000;
+}
+
+.archived-footer a:hover{
+  color: #000;
+}
+
+.archived-footer span{
+  display: flex;
+  width: 35px;
+  height: 35px;
+  font-size: 35px;
+  margin-right: 10px;
+}
+
+.archived-footer img{
+  width: 35px;
+  height: 35px;
+}
 
 .archived-modal .ant-btn{
   border: 1px solid #001529 !important;
