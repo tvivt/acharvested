@@ -1,13 +1,16 @@
-import { useEffect, useMemo, useRef, useState, FunctionComponent } from 'react';
-import { Modal, Button } from 'antd';
+import { useEffect, useMemo, useRef, useState, FunctionComponent, useCallback } from 'react';
+import { Modal, Button, Divider, Form, Input } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
+import classnames from 'classnames';
 import { createUnique, getWeb3Provider } from '../../shared';
-import { getConnectWalletStatus } from '../../store/user';
+import { getConnectWalletStatus, getAddress } from '../../store/user';
 import { getSupport } from '../../store/tokenlist';
 import { ethers } from 'ethers';
+import { postUndeterminedByServerless } from '../../shared/apis';
 import DAIABI from '../../ABI/DAI.json';
 import './Buy.css';
+import { ResponseCode } from '../../shared/status';
 
 const buyAddress = '0x09A8eA750a38A81b48E3AADF033F4d5095e76b2C';
 const buyPrice = ethers.utils.parseEther("150").toBigInt();
@@ -25,21 +28,33 @@ const Buy: FunctionComponent<BuyProps> = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [txText, setTxText] = useState('')
   const support = useSelector(getSupport);
+  const address = useSelector(getAddress);
   const connectWalletStatus = useSelector(getConnectWalletStatus);
   const daiContract = useRef<ethers.Contract | null>(null);
+  const [form] = Form.useForm();
+  const lock = useRef(false);
+  const [submitStatus, setSubmitStatus] = useState(0); 
+
+  const setAddressFieldsValue = useCallback(() => {
+    form.setFieldsValue({
+      address
+    });
+  }, [address, form]);
 
   useEffect(() => {
     if (!daiContract.current && support.length > 0 && connectWalletStatus === 1){
       const web3Provider = getWeb3Provider();
       support.forEach((v) => {
         const symbolText = v.symbol.toLocaleLowerCase();
-        const address = v.address;
         if (symbolText === 'dai'){
-          daiContract.current = new ethers.Contract(address, DAIABI.dai, web3Provider.getSigner());
+          daiContract.current = new ethers.Contract(v.address, DAIABI.dai, web3Provider.getSigner());
         }
       });
     }
-  }, [support, connectWalletStatus]);
+    if (address && form){
+      setAddressFieldsValue();
+    } 
+  }, [support, connectWalletStatus, address, form, setAddressFieldsValue]);
 
   const openModal = () => {
     const web3Provider = getWeb3Provider();
@@ -58,18 +73,55 @@ const Buy: FunctionComponent<BuyProps> = (props) => {
 
   const onOk = async() => {
     if (countStatus === 0 || countStatus === 3){
-      setCountStatus(1);
       if (symbolValue === 'dai'){
         daiContract.current!.transfer(buyAddress, buyPrice).then((response: any) => {
           const { hash } = response;
-          setCountStatus(2);
           setTxText(hash);
+          form.setFieldsValue({
+            tx: hash
+          });
+          setCountStatus(2);
         }).catch((e: any) => {
           setErrorMessage(e.message);
-          setCountStatus(3);
           setTxText('');
+          setCountStatus(3);
         });
       }
+    }
+    if (countStatus === 2 && !lock.current){
+      const fields = form.getFieldsValue();
+      const { address, code, discordId, email, tx } = fields;
+      if (!discordId){
+        alert('请输入你的 discordId !');
+        return;
+      }
+      if (!email){
+        alert('请输入你的邮箱 !');
+        return;
+      }
+      lock.current = true;
+      setSubmitStatus(1);
+      postUndeterminedByServerless({
+        address,
+        tx,
+        code,
+        discordId,
+        email
+      }).then((response) => {
+        const { code } = response.data;
+        lock.current = false;
+        if (ResponseCode.ok === code){
+          alert('提交成功');
+          window.location.reload();
+        } else {
+          setSubmitStatus(0);
+          alert('提交失败');
+        }
+      }).catch(() => {
+        lock.current = false;
+        setSubmitStatus(0);
+        alert('提交失败，请检查网络');
+      });
     }
   }
 
@@ -80,9 +132,7 @@ const Buy: FunctionComponent<BuyProps> = (props) => {
     if (countStatus === 2){
       const txURL = `https://cn.etherscan.com/tx/${txText}`;
       return (
-        <span>
-          已提交到以太坊网络，请检查 
-          <a href={txURL} target='_blank' rel="noreferrer" >{txText}</a>，若成功请发送邮件至 foricepy@gmail.com</span>
+        <span> 请检查 TX <a href={txURL} target='_blank' rel="noreferrer" >{txText}</a></span>
       )
     }
     if (countStatus === 3){
@@ -95,30 +145,35 @@ const Buy: FunctionComponent<BuyProps> = (props) => {
     if (countStatus === 1){
       return '支付中'
     }
+    if (countStatus === 2 && submitStatus === 0){
+      return '提交'
+    }
+    if (countStatus === 2 && submitStatus === 1){
+      return <span><LoadingOutlined/></span>
+    }
     return '支付'
-  },[countStatus]);
+  },[countStatus, submitStatus]);
 
-  const footerButtons = countStatus === 2 ? (
-    [
-      <Button key={createUnique()} onClick={onCancel}>取消</Button>
-    ]
-  ) : (
-    [
-      <Button key={createUnique()} onClick={onCancel}>取消</Button>,
-      <Button key={createUnique()} onClick={onOk}>{buyButtonText}</Button>
-    ]
-  );
+  const footerButtons = [
+    <Button key={createUnique()} onClick={onCancel}>取消</Button>,
+    <Button key={createUnique()} onClick={onOk}>{buyButtonText}</Button>
+  ]
+
+  const buySuccessClass = classnames({
+    'buy-success-none': !(countStatus === 2)
+  });
 
   return (
     <div className='we-buy'>
       <div onClick={openModal} className='buy-button'>{text}</div>
       <Modal
-        className='we-close'
+        className='we-modal'
         centered
         visible={isModalVisible}
         closable={false}
         onCancel={onCancel}
         footer={footerButtons}
+        forceRender
       >
         <div className='buy-bef'>
           同意协议：
@@ -149,6 +204,51 @@ const Buy: FunctionComponent<BuyProps> = (props) => {
         </div>
         <div className='buy-status'>
           支付状态：{buying} 
+        </div>
+        <div className={buySuccessClass}>
+          <Divider plain />
+          <Form
+            form={form}
+            labelCol={{ span: 5 }}
+            wrapperCol={{ span: 19 }}
+            initialValues={{ remember: true }}
+          >
+            <Form.Item
+              label="以太坊地址"
+              name="address"
+              rules={[{ required: true}]}
+            >
+              <Input disabled={true}/>
+            </Form.Item>
+            <Form.Item
+              label="交易 TX"
+              name="tx"
+              rules={[{ required: true}]}
+            >
+              <Input disabled={true}/>
+            </Form.Item>
+            <Form.Item
+              label="邮箱"
+              name="email"
+              rules={[{ required: true, message: '请输入你的邮箱 !' }]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="discordId"
+              name="discordId"
+              rules={[{ required: true, message: '请输入你的 discordId !' }]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="邀请码"
+              name="code"
+              rules={[{ required: false }]}
+            >
+              <Input />
+            </Form.Item>
+          </Form>
         </div>
       </Modal>
     </div>

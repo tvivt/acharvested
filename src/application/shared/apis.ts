@@ -164,3 +164,20 @@ export const fetchPremiumcheckByServerless: PremiumcheckFunc = (nonce, sign, add
     }
   });
 }
+
+interface UndeterminedRequest {
+  address: string;
+  email: string;
+  tx: string;
+  discordId?: string;
+  code?: string;
+}
+
+export const postUndeterminedByServerless = (params: UndeterminedRequest): AxiosPromise<Response> => {
+  const url = `${baseHost}/api/undeterminedlist`;
+  return axios({
+    url,
+    method: 'POST',
+    data: params
+  });
+}

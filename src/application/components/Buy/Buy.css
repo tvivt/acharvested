@@ -27,3 +27,31 @@
 .buy-desc{
   margin-bottom: 10px;
 }
+
+.buy-success-none{
+  display: none;
+}
+
+
+.we-modal .ant-btn{
+  border: 1px solid #001529 !important;
+  color: #001529 !important;
+}
+
+.we-modal .ant-btn-primary{
+  background: #001529 !important;
+  border-color: #001529 !important;
+}
+
+.we-modal .ant-btn-primary span{
+  color: #fff !important;
+}
+
+.we-modal .ant-input:hover{
+  border: 1px solid #d9d9d9;
+}
+
+.we-modal .ant-input:focus{
+  box-shadow: none;
+  border-color: #d9d9d9;
+}
