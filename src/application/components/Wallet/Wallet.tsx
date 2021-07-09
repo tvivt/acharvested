@@ -162,6 +162,7 @@ const Wallet = () => {
               code: 1
             }));
             alert('无法验证，原因是您未购买订阅 !');
+            window.location.reload();
             return;
           }
         });
