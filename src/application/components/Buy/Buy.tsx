@@ -13,7 +13,7 @@ import './Buy.css';
 import { ResponseCode } from '../../shared/status';
 
 const buyAddress = '0x09A8eA750a38A81b48E3AADF033F4d5095e76b2C';
-const buyPrice = ethers.utils.parseEther("150").toBigInt();
+const buyPrice = ethers.utils.parseEther("180").toBigInt();
 
 interface BuyProps {
   text: string;
@@ -200,7 +200,7 @@ const Buy: FunctionComponent<BuyProps> = (props) => {
           <span>若支付请勿关闭此窗口</span>
         </div>
         <div className='buy-desc'>
-          订阅价格：150 {symbolValue.toLocaleUpperCase()} / 年
+          订阅价格：180 {symbolValue.toLocaleUpperCase()} / 年
         </div>
         <div className='buy-status'>
           支付状态：{buying} 
